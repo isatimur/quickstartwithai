@@ -32,9 +32,16 @@ export default function EnhancedCleanArticle({
     bio,
     readingTime,
     body,
-} : ArticleProps) {
+}: ArticleProps) {
     const [progress, setProgress] = useState(0);
     const [activeSection, setActiveSection] = useState('');
+
+
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -132,8 +139,13 @@ export default function EnhancedCleanArticle({
                                 )}
                             </Avatar>
                             <div className="ml-4">
-                                <p className="text-lg font-medium">{authorName}</p>
-                                <p className="text-muted-foreground mt-2">{bio}</p>
+                                <p key={authorName} className="text-lg font-medium">{authorName}</p>
+                                <p key={bio} className="text-muted-foreground mt-2" suppressHydrationWarning>
+                                    {isClient ?
+                                        (bio ?
+                                            <PortableText value={bio as any} components={portableTextComponents} /> : null
+                                        ) : null}
+                                </p>
                             </div>
                         </div>
                     </div>

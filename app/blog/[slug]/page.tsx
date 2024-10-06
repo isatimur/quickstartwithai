@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             authorImage={createImageUrlBuilder(client).image(authorImageUrl).rect(0,0,1280,1280).height(400).width(400).url()}
             readingTime={readingTime.toString()}
             publishedDate={publishedDate}
-            authorBio={bio}
+            bio={bio}
             mainImage={createImageUrlBuilder(client).image(mainImageUrl).height(400).width(800).url()}
             body={post.body}
         />
