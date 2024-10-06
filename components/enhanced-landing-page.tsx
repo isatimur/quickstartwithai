@@ -24,7 +24,7 @@ export function EnhancedLandingPageComponent() {
           <nav className="hidden md:flex space-x-4">
             <a href="#features" className="text-gray-600 hover:text-blue-600">Features</a>
             <a href="#authors" className="text-gray-600 hover:text-blue-600">Authors</a>
-            <a href="#articles" className="text-gray-600 hover:text-blue-600">Articles</a>
+            <a href="/blog" className="text-gray-600 hover:text-blue-600">Articles</a>
           </nav>
           <Button
             variant="outline"
