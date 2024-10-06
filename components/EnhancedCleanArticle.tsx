@@ -18,6 +18,7 @@ interface ArticleProps {
     readingTime: string;
     mainImage: string;
     publishedDate: string;
+    bio: string;
     body: any[];
 }
 
@@ -28,6 +29,7 @@ export default function EnhancedCleanArticle({
     authorName,
     authorImage,
     publishedDate,
+    bio,
     readingTime,
     body,
 } : ArticleProps) {
@@ -131,7 +133,7 @@ export default function EnhancedCleanArticle({
                             </Avatar>
                             <div className="ml-4">
                                 <p className="text-lg font-medium">{authorName}</p>
-                                {/* <p className="text-muted-foreground mt-2">{authorBio}</p> */}
+                                <p className="text-muted-foreground mt-2">{bio}</p>
                             </div>
                         </div>
                     </div>
