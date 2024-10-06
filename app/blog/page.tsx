@@ -22,7 +22,7 @@ interface Post {
     authorImage: { asset: { _ref: string } };
     publishedAt: string;
     estimatedReadingTime: number;
-    categories: { title: string }[];
+    categories: string[];
 }
 
 export default async function BlogPage() {
@@ -84,11 +84,11 @@ export default async function BlogPage() {
                                 <div className="flex flex-wrap mt-2">
                                     {post.categories.map((category) => (
                                         <span
-                                            key={category.title}
+                                            key={category}
                                             className="inline-flex items-center px-2 py-1 mr-2 mt-2 text-xs font-medium text-blue-800 bg-blue-100 rounded"
                                         >
                                             <TagIcon className="w-3 h-3 mr-1" />
-                                            {category.title}
+                                            {category}
                                         </span>
                                     ))}
                                 </div>
