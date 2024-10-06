@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ChevronRight, BookOpen, Users, Zap, Mail, BookMarked, Brain } from 'lucide-react'
+import { ChevronRight, Users, Zap, Mail, BookMarked, Brain } from 'lucide-react'
 
 export function EnhancedLandingPageComponent() {
   const [showContactForm, setShowContactForm] = useState(false)
