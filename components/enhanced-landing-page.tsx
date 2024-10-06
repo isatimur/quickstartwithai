@@ -1,16 +1,60 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ChevronRight, Users, Mail, Brain } from 'lucide-react'
+import { ChevronRight, Users, Mail, Brain, CalendarIcon, ClockIcon, TagIcon } from 'lucide-react'
+import { client } from '@/sanity/lib/client';
+import Link from 'next/link';
+import createImageUrlBuilder from '@sanity/image-url';
+import groq from 'groq';
+import { format } from 'date-fns';
+
+interface Post {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  mainImage: { asset: { _ref: string } };
+  excerpt: string;
+  authorName: string;
+  authorImage: { asset: { _ref: string } };
+  publishedAt: string;
+  estimatedReadingTime: number;
+  categories: string[];
+}
 
 export function EnhancedLandingPageComponent() {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  // Fetch posts from Sanity CMS
+  useEffect(() => {
+    async function fetchPosts() {
+
+      const data: Post[] = await client.fetch(groq`
+        *[_type == "post"]{
+          _id,
+          title,
+          slug,
+          mainImage,
+          excerpt,
+          "authorName": author->name,
+          "authorImage": author->image,
+          publishedAt,
+          "estimatedReadingTime": round(length(pt::text(body)) / 5 / 200),
+          "categories": categories[]->title
+        } | order(publishedAt desc)
+      `);
+      setPosts(data);
+    }
+
+    fetchPosts();
+  }, []);
+
   const [showContactForm, setShowContactForm] = useState(false);
 
   // Header component
@@ -33,6 +77,62 @@ export function EnhancedLandingPageComponent() {
         </div>
       </header>
     )
+  }
+
+  // Articles Section to fetch posts
+  function ArticlesSection({ posts }: { posts: Post[] }) {
+    return (
+      <section id="articles" className="bg-gray-50 py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold mb-12 text-center">Latest Articles</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <Card key={post._id} className="overflow-hidden">
+                <Image
+                  alt={post.title}
+                  className="object-cover w-full h-48"
+                  height={200}
+                  src={createImageUrlBuilder(client).image(post.mainImage).height(200).width(400).url()}
+                  width={400}
+                />
+                <CardHeader>
+                  <CardTitle>{post.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{post.excerpt}</p>
+                  <div className="flex items-center mt-4 space-x-4 text-sm text-gray-500">
+                    <div className="flex items-center">
+                      <CalendarIcon className="w-4 h-4 mr-1" />
+                      <span>{format(new Date(post.publishedAt), 'MMM dd, yyyy')}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <ClockIcon className="w-4 h-4 mr-1" />
+                      <span>{post.estimatedReadingTime} min read</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap mt-2">
+                    {post.categories.map((category) => (
+                      <span
+                        key={category}
+                        className="inline-flex items-center px-2 py-1 mr-2 mt-2 text-xs font-medium text-blue-800 bg-blue-100 rounded"
+                      >
+                        <TagIcon className="w-3 h-3 mr-1" />
+                        {category}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button asChild>
+                    <Link href={`/blog/${post.slug.current}`}>Read More</Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
   }
 
   // Hero section (main introduction)
@@ -206,6 +306,26 @@ export function EnhancedLandingPageComponent() {
     )
   }
 
+  // Call to Action Section with Leanpub Link (New Section)
+  function CallToActionSection() {
+    return (
+      <section className="py-20 bg-blue-50">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-8">Accelerate Your AI Learning Journey</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Our step-by-step guide is packed with actionable insights on building AI applications with local models. Explore the full book and get started on mastering generative AI.
+          </p>
+          <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white">
+            <a href="https://leanpub.com/quickstartwithai" target="_blank" rel="noopener noreferrer">
+              Learn More on Leanpub <ChevronRight className="ml-2 h-5 w-5" />
+            </a>
+          </Button>
+        </div>
+      </section>
+    );
+  }
+
+
   // Author Card component used in Authors Section
   function AuthorCard({ author }: { author: { name: string, role: string, bio: string, image: string } }) {
     return (
@@ -321,6 +441,8 @@ export function EnhancedLandingPageComponent() {
         <HeroSection />
         <FeaturesSection />
         <AuthorsSection />
+        <ArticlesSection posts={posts} />
+        <CallToActionSection /> {/* New Call to Action Section */}
       </main>
       <Footer />
       {showContactForm && <ContactFormDialog />}
