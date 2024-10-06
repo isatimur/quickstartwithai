@@ -4,7 +4,7 @@ import { client } from '@/sanity/lib/client';
 import EnhancedCleanArticle from '@/components/EnhancedCleanArticle';
 import createImageUrlBuilder from '@sanity/image-url';
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 60;
 
 interface BlogPostPageProps {
     params: {
@@ -19,7 +19,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     title,
     mainImage,
     body,
-    "authorBio": author->bio, 
+    "authorBio": author->bio,
     "authorName": author->name,
     "authorImage": author->image,
     publishedAt}`;
