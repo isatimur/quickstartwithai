@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ChevronRight, BookOpen, Users, Zap, X, Mail, Star, BookMarked, Brain } from 'lucide-react'
+import { ChevronRight, BookOpen, Users, Zap, Mail, BookMarked, Brain } from 'lucide-react'
 
 export function EnhancedLandingPageComponent() {
   const [showContactForm, setShowContactForm] = useState(false)
@@ -26,7 +26,7 @@ export function EnhancedLandingPageComponent() {
             <a href="#authors" className="text-gray-600 hover:text-blue-600">Authors</a>
             <a href="#articles" className="text-gray-600 hover:text-blue-600">Articles</a>
           </nav>
-          <Button 
+          <Button
             variant="outline"
             onClick={() => setShowContactForm(true)}
           >
@@ -48,11 +48,16 @@ export function EnhancedLandingPageComponent() {
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
                     Pre-order Now <ChevronRight className="ml-2 h-5 w-5" />
                   </Button>
-                  <DialogTrigger asChild>
-                    <Button size="lg" variant="outline">
-                      Preview Chapter
-                    </Button>
-                  </DialogTrigger>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size="lg" variant="outline">
+                        Preview Chapter
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      {/* Dialog Content */}
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
               <div className="relative">
@@ -73,7 +78,7 @@ export function EnhancedLandingPageComponent() {
 
         <section id="features" className="py-20">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold mb-12 text-center">What's Inside</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center">What&apos;s Inside</h2>
             <Tabs defaultValue="fundamentals" className="w-full">
               <TabsList className="grid w-full grid-cols-3 mb-8">
                 <TabsTrigger value="fundamentals">AI Fundamentals</TabsTrigger>
@@ -212,7 +217,7 @@ export function EnhancedLandingPageComponent() {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold mb-8">Ready to Transform Your AI Journey?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Don't miss out on this comprehensive guide to mastering generative AI. Pre-order now and be among the first to unlock the potential of this groundbreaking technology.
+              Don&apos;t miss out on this comprehensive guide to mastering generative AI. Pre-order now and be among the first to unlock the potential of this groundbreaking technology.
             </p>
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
               Pre-order Now <ChevronRight className="ml-2 h-5 w-5" />
@@ -269,7 +274,7 @@ export function EnhancedLandingPageComponent() {
             <DialogHeader>
               <DialogTitle>Contact Authors</DialogTitle>
               <DialogDescription>
-                Send a message to Shamim Bhuyan and Timur Isachenko. We'll get back to you as soon as possible.
+                Send a message to Shamim Bhuyan and Timur Isachenko. We&apos;ll get back to you as soon as possible.
               </DialogDescription>
             </DialogHeader>
             <form className="space-y-4">
