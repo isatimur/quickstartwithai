@@ -217,54 +217,55 @@ export function EnhancedLandingPageComponent() {
     return (
       <section id="features" className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-12 text-center">What&apos;s Inside</h2>
-          <Tabs defaultValue="fundamentals" className="w-full">
+          <h2 className="text-4xl font-bold mb-12 text-center">What&apos;s Inside the Guide</h2>
+          <Tabs defaultValue="local-llm" className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-8">
-              <TabsTrigger value="fundamentals">AI Fundamentals</TabsTrigger>
-              <TabsTrigger value="applications">Practical Applications</TabsTrigger>
-              <TabsTrigger value="trends">Future Trends</TabsTrigger>
+              <TabsTrigger value="local-llm">Local LLM Setup</TabsTrigger>
+              <TabsTrigger value="agents">AI Agents</TabsTrigger>
+              <TabsTrigger value="rag">Advanced Techniques</TabsTrigger>
             </TabsList>
-            <TabsContent value="fundamentals">
+            <TabsContent value="local-llm">
               <FeatureCard
-                title="Master the Core Concepts"
-                description="Explore the basics of AI, machine learning, and deep learning."
+                title="Set Up and Run Local LLMs"
+                description="Learn how to set up and use Local LLMs efficiently for AI development."
                 features={[
-                  "Neural networks and deep learning architectures",
-                  "Training methodologies and optimization techniques",
-                  "Data preprocessing and feature engineering",
-                  "Model evaluation and performance metrics",
+                  "Install and configure local models using tools like Ollama",
+                  "Run LLMs on local hardware with minimal setup",
+                  "Fine-tune models for specific use cases",
+                  "Efficiently use tools like Python and Hugging Face to work with LLMs",
                 ]}
               />
             </TabsContent>
-            <TabsContent value="applications">
+            <TabsContent value="agents">
               <FeatureCard
-                title="Real-world Use Cases"
-                description="Learn how to apply generative AI to solve complex problems."
+                title="Build and Deploy AI Agents"
+                description="Discover how AI agents can automate tasks and enhance your productivity."
                 features={[
-                  "Natural language processing and text generation",
-                  "Image and video synthesis",
-                  "Anomaly detection and predictive maintenance",
-                  "Personalized content creation and recommendation systems",
+                  "Develop AI agents to handle repetitive tasks",
+                  "Integrate agents with real-world applications",
+                  "Use AI agents for content creation and business operations",
+                  "Architect multi-agent systems for complex scenarios",
                 ]}
               />
             </TabsContent>
-            <TabsContent value="trends">
+            <TabsContent value="rag">
               <FeatureCard
-                title="Stay Ahead of the Curve"
-                description="Explore emerging technologies and methodologies."
+                title="Master Advanced Techniques"
+                description="Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more."
                 features={[
-                  "Advancements in transformer architectures",
-                  "Ethical AI and responsible development practices",
-                  "Integration of generative AI with IoT and edge computing",
-                  "The role of AI in shaping the future of work",
+                  "Enrich LLMs with private datasets for better accuracy",
+                  "Apply RAG techniques to enhance model outputs",
+                  "Integrate LLMs with SQL databases for Text-to-SQL queries",
+                  "Use fine-tuning methods like LoRA and QLoRA for efficiency",
                 ]}
               />
             </TabsContent>
           </Tabs>
         </div>
       </section>
-    )
-  }
+    );
+}
+
 
   // Feature Card component used in Features Section
   function FeatureCard({ title, description, features }: { title: string; description: string; features: string[] }) {
