@@ -10,6 +10,8 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import { portableTextComponents } from './portableTextComponents';
 import { TableOfContents } from './TableOfContents';
+import Link from 'next/link';
+import { Brain } from 'lucide-react';
 
 interface ArticleProps {
     title: string;
@@ -66,7 +68,17 @@ export default function EnhancedCleanArticle({
     return (
         <div className="max-w-5xl mx-auto px-4 py-8">
             <Progress value={progress} className="fixed top-0 left-0 right-0 z-50" />
-            <header className="mb-12">
+            <header className="bg-white py-4 top-0 z-10 shadow-sm">
+                <div className="container mx-auto px-4 flex justify-between items-center">
+                    <div className="flex items-center space-x-2">
+                            <Brain className="h-8 w-8 text-blue-600" />
+                            <Link href="/"><h1 className="text-2xl font-bold">Generative AI Guide</h1></Link>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Link href="/blog">Blog</Link>
+                    </div>
+                </div>
+
                 <div className="relative h-[40vh] mb-8 rounded-xl overflow-hidden">
                     {mainImage && (
                         <Image
@@ -151,6 +163,6 @@ export default function EnhancedCleanArticle({
                     </div>
                 </div>
             </footer>
-        </div>
+        </div >
     );
 }

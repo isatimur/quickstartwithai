@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { CalendarIcon, ClockIcon, TagIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import createImageUrlBuilder from '@sanity/image-url';
-
+import { Brain } from 'lucide-react';
 export const revalidate = 60; // Revalidate every 60 seconds
 
 interface Post {
@@ -43,9 +43,17 @@ export default async function BlogPage() {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <header className="bg-white shadow">
-                <div className="container mx-auto px-4 py-6">
-                    <h1 className="text-3xl font-bold text-gray-900">The book: &quot;Getting started with Generative AI&quot;</h1>
+            <header className="bg-white py-4 sticky top-0 z-10 shadow-sm">
+                <div className="container mx-auto px-4 flex justify-between items-center">
+                    <div className="flex items-center space-x-2">
+
+                        <Brain className="h-8 w-8 text-blue-600" />
+                        <Link href="/"><h1 className="text-2xl font-bold">Generative AI Guide</h1></Link>
+
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Link href="/blog">Blog</Link>
+                    </div>
                 </div>
             </header>
             <main className="container mx-auto px-4 py-8">
