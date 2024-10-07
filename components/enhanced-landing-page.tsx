@@ -14,6 +14,9 @@ import Link from 'next/link';
 import createImageUrlBuilder from '@sanity/image-url';
 import groq from 'groq';
 import { format } from 'date-fns';
+import { AuroraBackground } from '@/components/ui/aurora-background';
+import { Cover } from '@/components/ui/cover';
+
 
 interface Post {
   _id: string;
@@ -138,27 +141,30 @@ export function EnhancedLandingPageComponent() {
   // Hero section (main introduction)
   function HeroSection() {
     return (
-      <section className="bg-gradient-to-r from-blue-50 to-indigo-100 py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-5xl font-bold mb-6 leading-tight text-gray-800">
-                Unlock the Power of <span className="text-blue-600">Generative AI</span>
-              </h2>
-              <p className="text-xl mb-8 text-gray-600">
-                Dive into the world of AI-driven content creation and problem-solving with expert guidance from Shamim Bhuyan and Timur Isachenko.
-              </p>
-              <div className="flex space-x-4">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                  Pre-order Now <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-                <PreviewChapterDialog />
+      
+      <section>
+          <AuroraBackground>
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-5xl font-bold mb-6 leading-tight text-gray-800">
+                Unlock the Power of <Cover className="text-blue-600">Generative AI</Cover>
+                </h2>
+                <p className="text-xl mb-8 text-gray-600">
+                  Dive into the world of AI-driven content creation and problem-solving with expert guidance from Shamim Bhuyan and Timur Isachenko.
+                </p>
+                <div className="flex space-x-4">
+                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                    Pre-order Now <ChevronRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <PreviewChapterDialog />
+                </div>
               </div>
+              <BookCover />
             </div>
-            <BookCover />
           </div>
-        </div>
-      </section>
+            </AuroraBackground>
+        </section>
     )
   }
 
@@ -264,7 +270,7 @@ export function EnhancedLandingPageComponent() {
         </div>
       </section>
     );
-}
+  }
 
 
   // Feature Card component used in Features Section
