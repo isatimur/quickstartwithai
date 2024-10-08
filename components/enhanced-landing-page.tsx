@@ -38,9 +38,6 @@ const content = {
       "title": "Download the free sample chapter of the book",
       "description": "Click the 'Read Free Sample' button on the book's landing page on Leanpub.",
       "downloadButton": "Go to the Leanpub book landing page",
-      "chapterTitle": "Chapter 1: Introduction to Generative AI",
-      "chapterDescription": "This chapter covers how to set up a local LLM, configure a Python environment, and begin your hands-on journey with AI.",
-
     }
   },
   "featuresSection": {
@@ -55,7 +52,7 @@ const content = {
     "featureCards": [
       {
         "title": "Set Up and Run Local LLMs",
-        "description": "Learn how to set up and use Local LLMs efficiently for AI development.",
+        "description": "Learn how to set up and use Local LLMs inference for AI development.",
         "features": [
           "Install and configure local LLMs using tools like Ollama",
           "Run LLMs on local hardware with minimal setup",
@@ -65,34 +62,24 @@ const content = {
       },
         {
           "title": "Generative AI architecture deep drive",
-          "description": "Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.",
+          "description": "Explore the fundamental concepts of Generative AI",
           "features": [
-            "Enrich LLMs with private datasets for better accuracy",
-            "Apply RAG techniques to enhance model outputs",
-            "Integrate LLMs with SQL databases for Text-to-SQL queries",
-            "Use Fine-tuning methods like LoRA and QLoRA for efficiency"
+            "Natural Language Processing",
+            "How LLM works internally?",
+            "Training LLM",
+            "Prompt engineering"
           ]
         },
       {
         "title": "Master Advanced Techniques",
         "description": "Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.",
         "features": [
-          "Enrich LLMs with private datasets for better accuracy",
-          "Apply RAG techniques to enhance model outputs",
+          "Apply RAG techniques with private datasets for better accuracy",
           "Integrate LLMs with SQL databases for Text-to-SQL queries",
-          "Use fine-tuning methods like LoRA and QLoRA for efficiency"
+          "Build and Deploy AI Agents",
+          "Fine-tuning LLMs (LoRA and QLoRA) for efficiency"
         ]
-      },
-    {
-      "title": "Build and Deploy AI Agents",
-      "description": "Discover how AI agents can automate tasks and enhance your productivity.",
-      "features": [
-        "Design multi-agent systems for complex scenarios",
-        "Integrate agents with real-world applications",
-        "Use AI agents for content creation and business operations",
-        "Develop AI agents to handle repetitive tasks"
-      ]
-    }
+      }
     ]
   },
   "authorsSection": {
