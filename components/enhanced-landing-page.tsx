@@ -45,7 +45,7 @@ const content = {
     "tabs": {
       "localLLM": "Setup your local LLM inference",
       "archDeepDrive": "Generative AI architecture deep drive",
-      "advancedTechniques": "Advanced AI Techniques"
+      "advancedTechniques": "Advanced AI Techniques",
       "aiAgents": "Developing AI Agents",
 
     },
@@ -79,8 +79,7 @@ const content = {
           "Integrate LLMs with SQL databases for Text-to-SQL queries",
           "Use fine-tuning methods like LoRA and QLoRA for efficiency"
         ]
-      }
-      ,
+      },
     {
       "title": "Build and Deploy AI Agents",
       "description": "Discover how AI agents can automate tasks and enhance your productivity.",
