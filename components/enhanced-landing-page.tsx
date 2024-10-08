@@ -19,7 +19,6 @@ const content = {
     "navLinks": {
       "features": "Features",
       "authors": "Authors",
-      "articles": "Articles"
     },
     "contactButton": "Contact Authors"
   },
