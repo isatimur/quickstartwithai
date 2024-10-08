@@ -1,19 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ChevronRight, Users, Mail, Brain, CalendarIcon, ClockIcon, TagIcon } from 'lucide-react'
-import { client } from '@/sanity/lib/client';
-import Link from 'next/link';
-import createImageUrlBuilder from '@sanity/image-url';
-import groq from 'groq';
-import { format } from 'date-fns';
+import { ChevronRight, Users, Mail, Brain } from 'lucide-react'
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { Cover } from '@/components/ui/cover'
 
@@ -60,16 +55,16 @@ const content = {
           "Configure local virtual environment for AI development"
         ]
       },
-        {
-          "title": "Generative AI terminology and jargon in plain English",
-          "description": "Explore the fundamental concepts of Generative AI",
-          "features": [
-            "Natural Language Processing",
-            "How LLM works internally?",
-            "Training LLM",
-            "Prompt engineering"
-          ]
-        },
+      {
+        "title": "Generative AI terminology and jargon in plain English",
+        "description": "Explore the fundamental concepts of Generative AI",
+        "features": [
+          "Natural Language Processing",
+          "How LLM works internally?",
+          "Training LLM",
+          "Prompt engineering"
+        ]
+      },
       {
         "title": "Master Advanced Techniques",
         "description": "Explore advanced AI techniques, including Fine-tuning, RAG and more.",
@@ -146,44 +141,7 @@ const content = {
   }
 }
 
-interface Post {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  mainImage: { asset: { _ref: string } };
-  excerpt: string;
-  authorName: string;
-  authorImage: { asset: { _ref: string } };
-  publishedAt: string;
-  estimatedReadingTime: number;
-  categories: string[];
-}
-
 export function EnhancedLandingPageComponent() {
-
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      const data: Post[] = await client.fetch(groq`
-        *[_type == "post"]{
-          _id,
-          title,
-          slug,
-          mainImage,
-          excerpt,
-          "authorName": author->name,
-          "authorImage": author->image,
-          publishedAt,
-          "estimatedReadingTime": round(length(pt::text(body)) / 5 / 200),
-          "categories": categories[]->title
-        } | order(publishedAt desc)
-      `);
-      setPosts(data);
-    }
-
-    fetchPosts();
-  }, []);
 
   const [showContactForm, setShowContactForm] = useState(false);
 
@@ -461,60 +419,6 @@ export function EnhancedLandingPageComponent() {
     );
   }
 
-  function ArticlesSection({ posts }: { posts: Post[] }) {
-    return (
-      <section id="articles" className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-12 text-center">Latest Articles</h2>
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <Card key={post._id} className="overflow-hidden">
-                <Image
-                  alt={post.title}
-                  className="object-cover w-full h-48"
-                  height={200}
-                  src={createImageUrlBuilder(client).image(post.mainImage).height(200).width(400).url()}
-                  width={400}
-                />
-                <CardHeader>
-                  <CardTitle>{post.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{post.excerpt}</p>
-                  <div className="flex items-center mt-4 space-x-4 text-sm text-gray-500">
-                    <div className="flex items-center">
-                      <CalendarIcon className="w-4 h-4 mr-1" />
-                      <span>{format(new Date(post.publishedAt), 'MMM dd, yyyy')}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <ClockIcon className="w-4 h-4 mr-1" />
-                      <span>{post.estimatedReadingTime} min read</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap mt-2">
-                    {post.categories.map((category) => (
-                      <span
-                        key={category}
-                        className="inline-flex items-center px-2 py-1 mr-2 mt-2 text-xs font-medium text-blue-800 bg-blue-100 rounded"
-                      >
-                        <TagIcon className="w-3 h-3 mr-1" />
-                        {category}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button asChild>
-                    <Link href={`/blog/${post.slug.current}`}>Read More</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
@@ -523,7 +427,6 @@ export function EnhancedLandingPageComponent() {
         <HeroSection />
         <FeaturesSection />
         <AuthorsSection />
-        <ArticlesSection posts={posts} />
         <CallToActionSection />
       </main>
       <Footer />
