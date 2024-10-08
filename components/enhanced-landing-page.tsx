@@ -29,47 +29,47 @@ const content = {
     "contactButton": "Contact Authors"
   },
   "heroSection": {
-    "title": "Unlock the Power of",
+    "title": "You don't need to be a machine learning expert to learn",
     "subtitle": "Generative AI",
-    "description": "Dive into the world of AI-driven content creation and problem-solving with expert guidance from Shamim Bhuyan and Timur Isachenko.",
-    "preOrderButton": "Pre-order Now",
+    "description": "Learn how to build your own AI application step-by-step. A hands-on guide to AI development with local LLM. ",
+    "preOrderButton": "Buy on Leanpub",
     "previewDialog": {
       "triggerButton": "Download the Free Sample",
-      "title": "Download the Free Sample",
-      "description": "Get a sneak peek into the book with this sample chapter on AI Fundamentals.",
-      "chapterTitle": "Chapter 1: Introduction to Generative AI",
-      "chapterDescription": "This chapter covers how to set up a local LLM, configure a Python environment, and begin your hands-on journey with AI.",
-      "downloadButton": "Download Full Chapter"
+      "title": "Download the free sample chapter of the book",
+      "description": "Click the 'Read Free Sample' button on the book's landing page on Leanpub.",
+      "downloadButton": "Go to the Leanpub book landing page"
     }
   },
   "featuresSection": {
-    "title": "What's Inside the Guide",
+    "title": "What's Inside the Book",
     "tabs": {
-      "localLLM": "Local LLM Setup",
-      "aiAgents": "AI Agents",
-      "advancedTechniques": "Advanced Techniques"
+      "localLLM": "Setup your local LLM inference",
+      "archDeepDrive": "Generative AI architecture deep drive",
+      "advancedTechniques": "Advanced AI Techniques"
+      "aiAgents": "Developing AI Agents",
+
     },
     "featureCards": [
       {
         "title": "Set Up and Run Local LLMs",
         "description": "Learn how to set up and use Local LLMs efficiently for AI development.",
         "features": [
-          "Install and configure local models using tools like Ollama",
+          "Install and configure local LLMs using tools like Ollama",
           "Run LLMs on local hardware with minimal setup",
-          "Fine-tune models for specific use cases",
-          "Efficiently use tools like Python and Hugging Face to work with LLMs"
+          "Hardware acceleration technics to improve the performance",
+          "Configure local virtual environment for AI development"
         ]
       },
-      {
-        "title": "Build and Deploy AI Agents",
-        "description": "Discover how AI agents can automate tasks and enhance your productivity.",
-        "features": [
-          "Develop AI agents to handle repetitive tasks",
-          "Integrate agents with real-world applications",
-          "Use AI agents for content creation and business operations",
-          "Architect multi-agent systems for complex scenarios"
-        ]
-      },
+        {
+          "title": "Generative AI architecture deep drive",
+          "description": "Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.",
+          "features": [
+            "Enrich LLMs with private datasets for better accuracy",
+            "Apply RAG techniques to enhance model outputs",
+            "Integrate LLMs with SQL databases for Text-to-SQL queries",
+            "Use Fine-tuning methods like LoRA and QLoRA for efficiency"
+          ]
+        },
       {
         "title": "Master Advanced Techniques",
         "description": "Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.",
@@ -80,6 +80,17 @@ const content = {
           "Use fine-tuning methods like LoRA and QLoRA for efficiency"
         ]
       }
+      ,
+    {
+      "title": "Build and Deploy AI Agents",
+      "description": "Discover how AI agents can automate tasks and enhance your productivity.",
+      "features": [
+        "Design multi-agent systems for complex scenarios",
+        "Integrate agents with real-world applications",
+        "Use AI agents for content creation and business operations",
+        "Develop AI agents to handle repetitive tasks"
+      ]
+    }
     ]
   },
   "authorsSection": {
