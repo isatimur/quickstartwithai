@@ -46,8 +46,6 @@ const content = {
       "localLLM": "Setup your local LLM inference",
       "archDeepDrive": "Generative AI architecture deep drive",
       "advancedTechniques": "Advanced AI Techniques",
-      "aiAgents": "Developing AI Agents",
-
     },
     "featureCards": [
       {
