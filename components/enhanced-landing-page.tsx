@@ -15,7 +15,6 @@ import createImageUrlBuilder from '@sanity/image-url';
 import groq from 'groq';
 import { format } from 'date-fns';
 import { AuroraBackground } from '@/components/ui/aurora-background';
-import { Cover } from '@/components/ui/cover';
 
 
 interface Post {
@@ -31,8 +30,16 @@ interface Post {
   categories: string[];
 }
 
+interface LandingPageContent {
+  heroTitle: string;
+  heroDescription: string;
+  ctaText: string;
+  ctaLink: string;
+}
+
 export function EnhancedLandingPageComponent() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [landingPageContent, setLandingPageContent] = useState<LandingPageContent | null>(null);
 
   // Fetch posts from Sanity CMS
   useEffect(() => {
@@ -56,6 +63,22 @@ export function EnhancedLandingPageComponent() {
     }
 
     fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    async function fetchLandingPageContent() {
+      const data: LandingPageContent = await client.fetch(groq`
+        *[_type == "landingPageContent"][0]{
+          heroTitle,
+          heroDescription,
+          ctaText,
+          ctaLink
+        }
+      `);
+      setLandingPageContent(data);
+    }
+
+    fetchLandingPageContent();
   }, []);
 
   const [showContactForm, setShowContactForm] = useState(false);
@@ -141,21 +164,20 @@ export function EnhancedLandingPageComponent() {
   // Hero section (main introduction)
   function HeroSection() {
     return (
-      
       <section>
-          <AuroraBackground>
+        <AuroraBackground>
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-5xl font-bold mb-6 leading-tight text-gray-800">
-                Unlock the Power of <Cover className="text-blue-600">Generative AI</Cover>
+                  {landingPageContent?.heroTitle || 'Unlock the Power of Generative AI'}
                 </h2>
                 <p className="text-xl mb-8 text-gray-600">
-                  Dive into the world of AI-driven content creation and problem-solving with expert guidance from Shamim Bhuyan and Timur Isachenko.
+                  {landingPageContent?.heroDescription || 'Dive into the world of AI-driven content creation and problem-solving with expert guidance.'}
                 </p>
                 <div className="flex space-x-4">
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                    Pre-order Now <ChevronRight className="ml-2 h-5 w-5" />
+                    {landingPageContent?.ctaText || 'Pre-order Now'} <ChevronRight className="ml-2 h-5 w-5" />
                   </Button>
                   <PreviewChapterDialog />
                 </div>
@@ -163,8 +185,8 @@ export function EnhancedLandingPageComponent() {
               <BookCover />
             </div>
           </div>
-            </AuroraBackground>
-        </section>
+        </AuroraBackground>
+      </section>
     )
   }
 
@@ -178,7 +200,7 @@ export function EnhancedLandingPageComponent() {
               <div className="book-cover">
                 <div className="book-inside"></div>
                 <div className="book-image">
-                  <Image src={'/book-cover.svg'} alt='Getting started with Generative AI' width={300} height={450} />
+                  <Image src={'/book-cover.webp'} alt='Getting started with Generative AI' width={300} height={450} />
                   <div className="effect"></div>
                   <div className="light"></div>
                 </div>
