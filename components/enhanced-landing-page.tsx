@@ -37,7 +37,10 @@ const content = {
       "triggerButton": "Download the Free Sample",
       "title": "Download the free sample chapter of the book",
       "description": "Click the 'Read Free Sample' button on the book's landing page on Leanpub.",
-      "downloadButton": "Go to the Leanpub book landing page"
+      "downloadButton": "Go to the Leanpub book landing page",
+      "chapterTitle": "Chapter 1: Introduction to Generative AI",
+      "chapterDescription": "This chapter covers how to set up a local LLM, configure a Python environment, and begin your hands-on journey with AI.",
+
     }
   },
   "featuresSection": {
@@ -45,7 +48,7 @@ const content = {
     "tabs": {
       "localLLM": "Setup your local LLM inference",
       "archDeepDrive": "Generative AI architecture deep drive",
-      "advancedTechniques": "Advanced AI Techniques"
+      "advancedTechniques": "Advanced AI Techniques",
       "aiAgents": "Developing AI Agents",
 
     },
@@ -198,24 +201,20 @@ export function EnhancedLandingPageComponent() {
 
   const [showContactForm, setShowContactForm] = useState(false);
 
-  useEffect(() => {
-    console.log('Content:', content); // Log the content to verify it's loaded
-  }, []);
-
   function Header() {
     return (
       <header className="bg-white py-4 sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Brain className="h-8 w-8 text-blue-600" />
-            <h1 className="text-2xl font-bold">{content.header.title} <span className="inline-block text-blue-600">{content.header.subtitle}</span></h1>
+            <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+            <h1 className="text-lg sm:text-2xl font-bold">{content.header.title} <span className="inline-block text-blue-600">{content.header.subtitle}</span></h1>
           </div>
           <nav className="hidden md:flex space-x-4">
             {Object.entries(content.header.navLinks).map(([key, value]) => (
               <a key={key} href={`#${key}`} className="text-gray-600 hover:text-blue-600">{value}</a>
             ))}
           </nav>
-          <Button variant="outline" onClick={() => setShowContactForm(true)}>
+          <Button variant="outline" onClick={() => setShowContactForm(true)} className="hidden sm:block">
             {content.header.contactButton}
           </Button>
         </div>
@@ -225,18 +224,18 @@ export function EnhancedLandingPageComponent() {
 
   function HeroSection() {
     return (
-      <section>
+      <section className="pt-12 sm:pt-24 pb-12 sm:pb-24">
         <AuroraBackground>
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-5xl font-bold mb-6 leading-tight text-gray-800">
+                <h2 className="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6 leading-tight text-gray-800">
                   {content.heroSection.title} <Cover className="inline-block text-blue-600">{content.heroSection.subtitle}</Cover>
                 </h2>
-                <p className="text-xl mb-8 text-gray-600">
+                <p className="text-lg sm:text-xl mb-6 sm:mb-8 text-gray-600">
                   {content.heroSection.description}
                 </p>
-                <div className="flex space-x-4">
+                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                   <Button
                     size="lg"
                     className="bg-blue-600 hover:bg-blue-700 text-white z-10"
@@ -284,7 +283,7 @@ export function EnhancedLandingPageComponent() {
             {content.heroSection.previewDialog.triggerButton}
           </Button>
         </DialogTrigger>
-        <DialogContent className="z-50"> {/* Ensure this is higher than the header and shadow */}
+        <DialogContent className="z-50">
           <DialogHeader>
             <DialogTitle>{content.heroSection.previewDialog.title}</DialogTitle>
             <DialogDescription>
@@ -308,13 +307,12 @@ export function EnhancedLandingPageComponent() {
   }
 
   function FeaturesSection() {
-
     return (
       <section id="features" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-12 text-center">{content.featuresSection.title}</h2>
           <Tabs defaultValue="localLLM" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-8">
               {Object.entries(content.featuresSection.tabs).map(([key, value]) => (
                 <TabsTrigger key={key} value={key}>{value}</TabsTrigger>
               ))}
@@ -357,7 +355,7 @@ export function EnhancedLandingPageComponent() {
       <section id="authors" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-12 text-center">{content.authorsSection.title}</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
             {content.authorsSection.authors.map((author, index) => (
               <AuthorCard key={index} author={author} />
             ))}
@@ -482,7 +480,7 @@ export function EnhancedLandingPageComponent() {
       <section id="articles" className="bg-gray-50 py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-12 text-center">Latest Articles</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <Card key={post._id} className="overflow-hidden">
                 <Image
