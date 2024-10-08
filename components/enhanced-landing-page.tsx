@@ -72,7 +72,7 @@ const content = {
         },
       {
         "title": "Master Advanced Techniques",
-        "description": "Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.",
+        "description": "Explore advanced AI techniques, including Fine-tuning, RAG and more.",
         "features": [
           "Apply RAG techniques with private datasets for better accuracy",
           "Integrate LLMs with SQL databases for Text-to-SQL queries",
