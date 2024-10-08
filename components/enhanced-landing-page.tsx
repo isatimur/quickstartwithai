@@ -31,7 +31,7 @@ const content = {
   "heroSection": {
     "title": "You don't need to be a machine learning expert to learn",
     "subtitle": "Generative AI",
-    "description": "Learn how to build your own AI application step-by-step. A hands-on guide to AI development with local LLM. ",
+    "description": "A comprehensive and practical roadmap to develop AI application with local LLM inference.",
     "preOrderButton": "Buy on Leanpub",
     "previewDialog": {
       "triggerButton": "Download the Free Sample",
@@ -61,7 +61,7 @@ const content = {
         ]
       },
         {
-          "title": "Generative AI architecture deep drive",
+          "title": "Generative AI terminology and jargon in plain English",
           "description": "Explore the fundamental concepts of Generative AI",
           "features": [
             "Natural Language Processing",
@@ -76,7 +76,7 @@ const content = {
         "features": [
           "Apply RAG techniques with private datasets for better accuracy",
           "Integrate LLMs with SQL databases for Text-to-SQL queries",
-          "Build and Deploy AI Agents",
+          "Practical examples of developing AI Agents",
           "Fine-tuning LLMs (LoRA and QLoRA) for efficiency"
         ]
       }
