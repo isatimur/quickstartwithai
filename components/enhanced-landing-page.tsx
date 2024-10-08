@@ -295,7 +295,7 @@ export function EnhancedLandingPageComponent() {
   // Authors Section
   function AuthorsSection() {
     const authors = [
-      { name: "Shamim Bhuyan", role: "Enterprise Architect", bio: "With 23 years of experience, Shamim specializes in Middleware solutions, Big Data, and Data Science.", image: "/shamim.webp" },
+      { name: "Shamim Bhuiyan", role: "Enterprise Architect", bio: "With 23 years of experience, Shamim specializes in Middleware solutions, Big Data, and Data Science.", image: "/shamim.webp" },
       { name: "Timur Isachenko", role: "Technical Lead & Solution Architect", bio: "With 14 years of experience, Timur is known for his expertise in backend development and microservices architecture.", image: "/timur_isachenko.webp" }
     ];
 
