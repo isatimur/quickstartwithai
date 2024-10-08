@@ -186,3 +186,12 @@ body {
   }
 }
 
+/* Example CSS adjustments */
+.dialog-content {
+  z-index: 50; /* Ensure this is higher than other elements */
+}
+
+.dialog-shadow {
+  z-index: 49; /* Ensure this is lower than the dialog content */
+}
+
