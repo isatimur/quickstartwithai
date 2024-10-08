@@ -37,6 +37,8 @@ const content = {
       "triggerButton": "Download the Free Sample",
       "title": "Download the free sample chapter of the book",
       "description": "Click the 'Read Free Sample' button on the book's landing page on Leanpub.",
+      "chapterTitle": "Chapter 1: Introduction to Generative AI",
+      "chapterDescription": "This chapter covers how to set up a local LLM, configure a Python environment, and begin your hands-on journey with AI.",
       "downloadButton": "Go to the Leanpub book landing page"
     }
   },
