@@ -67,7 +67,7 @@ export function EnhancedLandingPageComponent() {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <Brain className="h-8 w-8 text-blue-600" />
-            <h1 className="text-2xl font-bold">Generative AI Guide</h1>
+            <h1 className="text-2xl font-bold">Getting started with Generative AI</h1>
           </div>
           <nav className="hidden md:flex space-x-4">
             <a href="#features" className="text-gray-600 hover:text-blue-600">Features</a>
@@ -196,12 +196,12 @@ export function EnhancedLandingPageComponent() {
       <Dialog>
         <DialogTrigger asChild>
           <Button size="lg" variant="outline">
-            Preview Chapter
+            Download the Free Sample
           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Preview Chapter</DialogTitle>
+            <DialogTitle>Download the Free Sample</DialogTitle>
             <DialogDescription>
               Get a sneak peek into the book with this sample chapter on AI Fundamentals.
             </DialogDescription>
@@ -295,7 +295,7 @@ export function EnhancedLandingPageComponent() {
   // Authors Section
   function AuthorsSection() {
     const authors = [
-      { name: "Shamim Bhuiyan", role: "Enterprise Architect", bio: "With 23 years of experience, Shamim specializes in Middleware solutions, Big Data, and Data Science.", image: "/shamim.webp" },
+      { name: "Shamim Bhuiyan", role: "Enterprise Architect", bio: "With 23 years of experience, Shamim specializes in designing high-load and highly scalable IT systems.", image: "/shamim.webp" },
       { name: "Timur Isachenko", role: "Technical Lead & Solution Architect", bio: "With 14 years of experience, Timur is known for his expertise in backend development and microservices architecture.", image: "/timur_isachenko.webp" }
     ];
 
@@ -318,9 +318,9 @@ export function EnhancedLandingPageComponent() {
     return (
       <section className="py-20 bg-blue-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-8">Accelerate Your AI Learning Journey</h2>
+          <h2 className="text-4xl font-bold mb-8">Accelerate your AI learning journey</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Our step-by-step guide is packed with actionable insights on building AI applications with local models. Explore the full book and get started on mastering generative AI.
+            Learn how to build your own AI application step-by-step. A hands-on guide to AI development with local LLM.
           </p>
           <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white">
             <a href="https://leanpub.com/quickstartwithai" target="_blank" rel="noopener noreferrer">
@@ -386,7 +386,7 @@ export function EnhancedLandingPageComponent() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
-            &copy; 2024 Shamim Bhuyan and Timur Isachenko. All rights reserved.
+            &copy; 2024 Shamim Bhuiyan & Timur Isachenko. All rights reserved.
           </div>
         </div>
       </footer>
@@ -415,7 +415,7 @@ export function EnhancedLandingPageComponent() {
           <DialogHeader>
             <DialogTitle>Contact Authors</DialogTitle>
             <DialogDescription>
-              Send a message to Shamim Bhuyan and Timur Isachenko. We&apos;ll get back to you as soon as possible.
+              Send a message to Shamim Bhuiyan and Timur Isachenko. We&apos;ll get back to you as soon as possible.
             </DialogDescription>
           </DialogHeader>
           <form className="space-y-4">
