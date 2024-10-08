@@ -178,7 +178,7 @@ export function EnhancedLandingPageComponent() {
               <div className="book-cover">
                 <div className="book-inside"></div>
                 <div className="book-image">
-                  <Image src={'/book-cover.webp'} alt='Getting started with Generative AI' width={300} height={450} />
+                  <Image src={'/book-cover.svg'} alt='Getting started with Generative AI' width={300} height={450} />
                   <div className="effect"></div>
                   <div className="light"></div>
                 </div>
