@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ChevronRight, Users, Mail, Brain } from 'lucide-react'
 import { AuroraBackground } from '@/components/ui/aurora-background';
@@ -38,17 +37,50 @@ const content = {
   },
   "featuresSection": {
     "title": "What's Inside the Book",
-    "tabs": {
-      "localLLM": "Setup your local LLM inference",
-      "archDeepDrive": "Generative AI architecture deep drive",
-      "advancedTechniques": "Advanced AI Techniques"
+    "tabs": [
+      {
+      id: 'local-llm',
+      title: 'Local LLM Setup',
+      description: 'Learn how to set up and use Local LLMs efficiently for AI development.',
+      imageUrl: '/images/local-llm.jpg',
+      features: [
+        "Install and configure local models using tools like Ollama",
+        "Run LLMs on local hardware with minimal setup",
+        "Fine-tune models for specific use cases",
+        "Efficiently use tools like Python and Hugging Face to work with LLMs",
+      ],
     },
+    {
+      "id": 'agents',
+      "title": 'AI Agents',
+      "description": 'Discover how AI agents can automate tasks and enhance your productivity.',
+      "imageUrl": '/images/ai-agents.jpg',
+      "features": [
+        "Develop AI agents to handle repetitive tasks",
+        "Integrate agents with real-world applications",
+        "Use AI agents for content creation and business operations",
+        "Architect multi-agent systems for complex scenarios",
+      ],
+    },
+    {
+      "id": 'rag',
+      "title": 'Advanced Techniques',
+      "description": 'Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.',
+      "imageUrl": '/images/advanced-techniques.jpg',
+      "features": [
+        "Enrich LLMs with private datasets for better accuracy",
+        "Apply RAG techniques to enhance model outputs",
+        "Integrate LLMs with SQL databases for Text-to-SQL queries",
+        "Use fine-tuning methods like LoRA and QLoRA for efficiency",
+      ],
+    }
+    ],
     "featureCards": [
       {
         "title": "Set Up and Run Local LLMs",
         "description": "Learn how to set up and use Local LLMs inference for AI development.",
         "features": [
-          "Install and configure local LLMs using tools like Ollama",
+          "Install and configure local models using tools like Ollama",
           "Run LLMs on local hardware with minimal setup",
           "Hardware acceleration technics to improve the performance",
           "Configure local virtual environment for AI development"
@@ -168,31 +200,29 @@ export function EnhancedLandingPageComponent() {
   function HeroSection() {
     return (
       <section className="pt-12 sm:pt-24 pb-12 sm:pb-24">
-        <AuroraBackground>
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h2 className="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6 leading-tight text-gray-800">
-                  {content.heroSection.title} <Cover className="inline-block text-blue-600">{content.heroSection.subtitle}</Cover>
-                </h2>
-                <p className="text-lg sm:text-xl mb-6 sm:mb-8 text-gray-600">
-                  {content.heroSection.description}
-                </p>
-                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                  <Button
-                    size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white z-10"
-                    onClick={() => window.open("https://leanpub.com/quickstartwithai", "_blank", "noopener,noreferrer")}
-                  >
-                    {content.heroSection.preOrderButton} <ChevronRight className="ml-2 h-5 w-5" />
-                  </Button>
-                  <PreviewChapterDialog />
-                </div>
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6 leading-tight text-gray-800">
+                {content.heroSection.title} <Cover className="inline-block text-blue-600">{content.heroSection.subtitle}</Cover>
+              </h2>
+              <p className="text-lg sm:text-xl mb-6 sm:mb-8 text-gray-600">
+                {content.heroSection.description}
+              </p>
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <Button
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white z-10"
+                  onClick={() => window.open("https://leanpub.com/quickstartwithai", "_blank", "noopener,noreferrer")}
+                >
+                  {content.heroSection.preOrderButton} <ChevronRight className="ml-2 h-5 w-5" />
+                </Button>
+                <PreviewChapterDialog />
               </div>
-              <BookCover />
             </div>
+            <BookCover />
           </div>
-        </AuroraBackground>
+        </div>
       </section>
     );
   }
@@ -254,22 +284,16 @@ export function EnhancedLandingPageComponent() {
       <section id="features" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-12 text-center">{content.featuresSection.title}</h2>
-          <Tabs defaultValue="localLLM" className="w-full">
-            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-8">
-              {Object.entries(content.featuresSection.tabs).map(([key, value]) => (
-                <TabsTrigger key={key} value={key}>{value}</TabsTrigger>
-              ))}
-            </TabsList>
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3">
             {content.featuresSection.featureCards.map((card, index) => (
-              <TabsContent key={index} value={Object.keys(content.featuresSection.tabs)[index]}>
-                <FeatureCard
-                  title={card.title}
-                  description={card.description}
-                  features={card.features}
-                />
-              </TabsContent>
+              <FeatureCard
+                key={index}
+                title={card.title}
+                description={card.description}
+                features={card.features}
+              />
             ))}
-          </Tabs>
+          </div>
         </div>
       </section>
     );
@@ -423,7 +447,11 @@ export function EnhancedLandingPageComponent() {
     <div className="min-h-screen bg-white text-gray-800">
       <Header />
       <main>
-        <HeroSection />
+        <AuroraBackground>
+          <div className="relative z-10">
+            <HeroSection />
+          </div>
+        </AuroraBackground>
         <FeaturesSection />
         <AuthorsSection />
         <CallToActionSection />
