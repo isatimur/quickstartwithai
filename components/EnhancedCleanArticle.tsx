@@ -40,41 +40,29 @@ export default function EnhancedCleanArticle({
     body,
 }: ArticleProps) {
     const [progress, setProgress] = useState(0);
-    const progressRef = useRef(0);
-    const rafRef = useRef<number | null>(null);
+    const articleRef = useRef<HTMLDivElement>(null);
+    const [showFloatingMenu, setShowFloatingMenu] = useState(false);
 
-    const updateDOMWithLatestState = useCallback(() => {
-        setProgress(progressRef.current);
+    const updateProgress = useCallback(() => {
+        if (articleRef.current) {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            const windowHeight = scrollHeight - clientHeight;
+            const currentProgress = (scrollTop / windowHeight) * 100;
+            setProgress(currentProgress);
+            setShowFloatingMenu(scrollTop > 300);
+        }
     }, []);
 
-    const handleScroll = useCallback(() => {
-        if (rafRef.current) {
-            cancelAnimationFrame(rafRef.current);
-        }
-
-        rafRef.current = requestAnimationFrame(() => {
-            const scrollPosition = window.scrollY;
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            progressRef.current = (scrollPosition / totalHeight) * 100;
-            updateDOMWithLatestState();
-        });
-    }, [updateDOMWithLatestState]);
-
     useEffect(() => {
-        const scrollHandler = () => {
-            if (!rafRef.current) {
-                rafRef.current = requestAnimationFrame(handleScroll);
-            }
+        const handleScroll = () => {
+            requestAnimationFrame(updateProgress);
         };
 
-        window.addEventListener('scroll', scrollHandler, { passive: true });
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => {
-            window.removeEventListener('scroll', scrollHandler);
-            if (rafRef.current) {
-                cancelAnimationFrame(rafRef.current);
-            }
+            window.removeEventListener('scroll', handleScroll);
         };
-    }, [handleScroll]);
+    }, [updateProgress]);
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -98,7 +86,7 @@ export default function EnhancedCleanArticle({
     const formattedDate = formatDate(publishedAt);
 
     return (
-        <div className="max-w-5xl mx-auto px-4 py-8 relative">
+        <div className="max-w-5xl mx-auto px-4 py-8 relative" ref={articleRef}>
             <Progress value={progress} className="fixed top-0 left-0 right-0 z-50" />
 
             <Button asChild className="mb-4">
@@ -161,19 +149,21 @@ export default function EnhancedCleanArticle({
                 </main>
             </div>
 
-            <div className={`fixed bottom-8 right-8 flex flex-col space-y-2 transition-opacity duration-300 ${progress > 0 ? 'opacity-100' : 'opacity-0'}`}>
-                <Button onClick={shareArticle} className="rounded-full p-2">
-                    <Share2 className="h-5 w-5" />
-                </Button>
-                <Button asChild className="rounded-full p-2">
-                    <Link href="/blog">
-                        <ArrowLeft className="h-5 w-5" />
-                    </Link>
-                </Button>
-                <Button onClick={scrollToTop} className="rounded-full p-2">
-                    <ArrowUp className="h-5 w-5" />
-                </Button>
-            </div>
+            {showFloatingMenu && (
+                <div className="fixed bottom-8 right-8 flex flex-col space-y-2">
+                    <Button onClick={shareArticle} className="rounded-full p-2">
+                        <Share2 className="h-5 w-5" />
+                    </Button>
+                    <Button asChild className="rounded-full p-2">
+                        <Link href="/blog">
+                            <ArrowLeft className="h-5 w-5" />
+                        </Link>
+                    </Button>
+                    <Button onClick={scrollToTop} className="rounded-full p-2">
+                        <ArrowUp className="h-5 w-5" />
+                    </Button>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,16 +1,13 @@
 import {DocumentTextIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType, StringInputProps} from 'sanity'
 import CodeInput from '@/sanity/components/CodeInput'
-
-// Define a custom type for the code field
 
 const codeField = defineField({
   name: 'code',
   title: 'Code',
   type: 'text',
   components: {
-    // @es-lint-disable-line
-    input: CodeInput
+    input: CodeInput as React.ComponentType<StringInputProps>
   }
 })
 

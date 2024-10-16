@@ -45,6 +45,7 @@ const BlogContent: React.FC<BlogContentProps> = ({ content }) => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+  console.log(isClient);
 
   const components: PortableTextComponents = {
     types: {

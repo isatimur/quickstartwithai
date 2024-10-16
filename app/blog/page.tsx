@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { groq } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
@@ -35,11 +35,7 @@ export default function BlogPage() {
     const [hasMore, setHasMore] = useState(true);
     const [totalPosts, setTotalPosts] = useState(0);
 
-    useEffect(() => {
-        fetchPosts(true);
-    }, []);
-
-    const fetchPosts = async (reset = false) => {
+    const fetchPosts = useCallback(async (reset = false) => {
         const newPage = reset ? 1 : page;
         const query = groq`{
             "posts": *[_type == "post" && title match $searchTerm + "*"] | order(publishedAt desc) [${(newPage - 1) * POSTS_PER_PAGE}...${newPage * POSTS_PER_PAGE}] {
@@ -66,7 +62,11 @@ export default function BlogPage() {
         setTotalPosts(results.total);
         setHasMore(results.posts.length === POSTS_PER_PAGE && (newPage * POSTS_PER_PAGE) < results.total);
         setPage(newPage + 1);
-    };
+    }, [page, searchTerm]);
+
+    useEffect(() => {
+        fetchPosts(true);
+    }, [fetchPosts]);
 
     const handleSearch = () => {
         fetchPosts(true);

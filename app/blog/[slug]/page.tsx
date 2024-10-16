@@ -21,7 +21,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     title,
     mainImage,
     body,
-    "authorBio": author->bio,
     "authorName": author->name,
     "authorImage": author->image,
     publishedAt}`;
@@ -46,12 +45,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
     const mainImageUrl = post.mainImage || null;
     const authorImageUrl = post.authorImage || null;
-    const bio = post.authorBio || null;
-    const publishedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-    });
 
     return (
         <>
