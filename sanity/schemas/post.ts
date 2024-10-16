@@ -29,9 +29,44 @@ export default defineType({
             type: "text",
         },
         {
-            name: "body",
-            title: "Body",
-            type: "blockContent", // This should match the name defined in blockContent.ts
+            name: 'body',
+            title: 'Body',
+            type: 'array',
+            of: [
+              { type: 'block' },  // Rich text (basic Markdown/HTML styling)
+              {
+                type: 'image',
+                fields: [
+                  {
+                    name: 'alt',
+                    title: 'Alt text',
+                    type: 'string',
+                  },
+                  {
+                    name: 'caption',
+                    title: 'Caption',
+                    type: 'string',
+                  },
+                  {
+                    name: 'customSize',
+                    title: 'Custom Size',
+                    type: 'object',
+                    fields: [
+                      { name: 'width', type: 'number', title: 'Width' },
+                      { name: 'height', type: 'number', title: 'Height' }
+                    ]
+                  }
+                ],
+              },
+              {
+                type: 'code',
+                title: 'Code Block',
+                options: {
+                  language: 'python',
+                  withFilename: true,
+                },
+              },
+            ],
         },
         {
             name: "author",

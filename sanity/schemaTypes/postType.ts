@@ -1,5 +1,18 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import CodeInput from '@/sanity/components/CodeInput'
+
+// Define a custom type for the code field
+
+const codeField = defineField({
+  name: 'code',
+  title: 'Code',
+  type: 'text',
+  components: {
+    // @es-lint-disable-line
+    input: CodeInput
+  }
+})
 
 export const postType = defineType({
   name: 'post',
@@ -48,7 +61,61 @@ export const postType = defineType({
     }),
     defineField({
       name: 'body',
-      type: 'blockContent',
+      title: 'Body',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+        },
+        {
+          type: 'image',
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+            },
+            {
+              name: 'customSize',
+              type: 'object',
+              title: 'Custom Size',
+              fields: [
+                { name: 'width', type: 'number', title: 'Width' },
+                { name: 'height', type: 'number', title: 'Height' },
+              ],
+            },
+          ],
+        },
+        defineArrayMember({
+          type: 'object',
+          name: 'code',
+          title: 'Code Block',
+          fields: [
+            {
+              name: 'language',
+              title: 'Language',
+              type: 'string',
+            },
+            codeField,
+            {
+              name: 'filename',
+              title: 'Filename',
+              type: 'string',
+            },
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'text',
+      description: 'A short summary of the post',
     }),
   ],
   preview: {

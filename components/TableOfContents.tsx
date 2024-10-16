@@ -1,39 +1,49 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from 'react';
-
-interface Heading {
-    text: string;
-    level: number;
-    slug: string;
-}
+import React from 'react';
+import { ContentBlock } from './BlogContent';
 
 interface TableOfContentsProps {
-    body: any[];
+    content: ContentBlock[];
 }
 
-export const TableOfContents: React.FC<TableOfContentsProps> = ({ body }) => {
-    const [headings, setHeadings] = useState<Heading[]>([]);
+interface Heading {
+    id: string;
+    text: string;
+    level: number;
+}
 
-    useEffect(() => {
-        const newHeadings: Heading[] = body
-            .filter((block) => block._type === 'block' && block.style?.startsWith('h'))
-            .map((block) => ({
-                text: block.children.map((child: any) => child.text).join(''),
-                level: parseInt(block.style.replace('h', '')),
-                slug: block._key,
+export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
+    const headings: Heading[] = React.useMemo(() => {
+        return content
+            .filter((block: any) => 
+                block._type === 'block' && 
+                ['h1', 'h2', 'h3', 'h4'].includes(block.style)
+            )
+            .map((block: any) => ({
+                id: `heading-${block._key}`,
+                text: block.children
+                    .filter((child: any) => child._type === 'span')
+                    .map((span: any) => span.text)
+                    .join(''),
+                level: parseInt(block.style.charAt(1)),
             }));
-        setHeadings(newHeadings);
-    }, [body]);
+    }, [content]);
+
+    if (headings.length === 0) {
+        return null;
+    }
 
     return (
         <nav className="space-y-1 text-sm">
             {headings.map((heading) => (
                 <a
-                    key={heading.slug}
-                    href={`#${heading.slug}`}
-                    className={`block py-2 px-3 rounded-md transition-colors hover:bg-gray-100`}
+                    key={heading.id}
+                    href={`#${heading.id}`}
+                    className={`block py-2 px-3 rounded-md transition-colors hover:bg-gray-100 ${
+                        heading.level > 2 ? `ml-${(heading.level - 2) * 4}` : ''
+                    }`}
                 >
-                    <span className={`pl-${(heading.level - 1) * 2}`}>{heading.text}</span>
+                    {heading.text}
                 </a>
             ))}
         </nav>

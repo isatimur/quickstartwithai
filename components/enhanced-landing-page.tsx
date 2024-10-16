@@ -7,9 +7,10 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ChevronRight, Users, Mail, Brain } from 'lucide-react'
+import { ChevronRight, Users, Mail } from 'lucide-react'
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { Cover } from '@/components/ui/cover'
+import { NavBar } from '@/components/NavBar'
 
 const content = {
   "header": {
@@ -176,26 +177,26 @@ export function EnhancedLandingPageComponent() {
 
   const [showContactForm, setShowContactForm] = useState(false);
 
-  function Header() {
-    return (
-      <header className="bg-white py-4 sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
-            <h1 className="text-lg sm:text-2xl font-bold">{content.header.title} <span className="inline-block text-blue-600">{content.header.subtitle}</span></h1>
-          </div>
-          <nav className="hidden md:flex space-x-4">
-            {Object.entries(content.header.navLinks).map(([key, value]) => (
-              <a key={key} href={`#${key}`} className="text-gray-600 hover:text-blue-600">{value}</a>
-            ))}
-          </nav>
-          <Button variant="outline" onClick={() => setShowContactForm(true)} className="hidden sm:block">
-            {content.header.contactButton}
-          </Button>
-        </div>
-      </header>
-    );
-  }
+  // function Header() {
+  //   return (
+  //     <header className="bg-white py-4 sticky top-0 z-50 shadow-sm">
+  //       <div className="container mx-auto px-4 flex justify-between items-center">
+  //         <div className="flex items-center space-x-2">
+  //           <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+  //           <h1 className="text-lg sm:text-2xl font-bold">{content.header.title} <span className="inline-block text-blue-600">{content.header.subtitle}</span></h1>
+  //         </div>
+  //         <nav className="hidden md:flex space-x-4">
+  //           {Object.entries(content.header.navLinks).map(([key, value]) => (
+  //             <a key={key} href={`#${key}`} className="text-gray-600 hover:text-blue-600">{value}</a>
+  //           ))}
+  //         </nav>
+  //         <Button variant="outline" onClick={() => setShowContactForm(true)} className="hidden sm:block">
+  //           {content.header.contactButton}
+  //         </Button>
+  //       </div>
+  //     </header>
+  //   );
+  // }
 
   function HeroSection() {
     return (
@@ -445,7 +446,7 @@ export function EnhancedLandingPageComponent() {
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
-      <Header />
+      <NavBar />
       <main>
         <AuroraBackground>
           <div className="relative z-10">

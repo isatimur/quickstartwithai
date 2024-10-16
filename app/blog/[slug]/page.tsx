@@ -3,6 +3,8 @@ import { groq } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
 import EnhancedCleanArticle from '@/components/EnhancedCleanArticle';
 import createImageUrlBuilder from '@sanity/image-url';
+import Head from 'next/head';
+import { NavBar } from '@/components/NavBar';
 
 export const revalidate = 60;
 
@@ -52,15 +54,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     });
 
     return (
+        <>
+        <Head>
+          <title>{post.title}</title>
+          <meta name="description" content={`${post.title} by ${post.authorName}`} />
+          <meta property="og:title" content={post.title} />
+          <meta property="og:type" content="article" />
+          <meta property="og:image" content={mainImageUrl} />
+        </Head>
+        <NavBar />
         <EnhancedCleanArticle
             title={post.title}
             authorName={post.authorName || 'Unknown Author'}
             authorImage={createImageUrlBuilder(client).image(authorImageUrl).rect(0,0,1280,1280).height(400).width(400).url()}
             readingTime={readingTime.toString()}
-            publishedDate={publishedDate}
-            bio={bio}
+            publishedAt={post.publishedAt}
             mainImage={createImageUrlBuilder(client).image(mainImageUrl).height(400).width(800).url()}
             body={post.body}
         />
+        </>
     );
 }

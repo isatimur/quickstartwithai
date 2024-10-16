@@ -1,4 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
+
+import { useState, useEffect } from 'react';
 import { groq } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
@@ -9,8 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { CalendarIcon, ClockIcon, TagIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import createImageUrlBuilder from '@sanity/image-url';
-import { Brain } from 'lucide-react';
-export const revalidate = 60; // Revalidate every 60 seconds
+import { NavBar } from '@/components/NavBar';
 
 interface Post {
     _id: string;
@@ -25,44 +26,70 @@ interface Post {
     categories: string[];
 }
 
-export default async function BlogPage() {
-    const posts: Post[] = await client.fetch(groq`
-        *[_type == "post"]{
-          _id,
-          title,
-          slug,
-          mainImage,
-          excerpt,
-          "authorName": author->name,
-          "authorImage": author->image,
-          publishedAt,
-          "estimatedReadingTime": round(length(pt::text(body)) / 5 / 200),
-          "categories": categories[]->title
-        } | order(publishedAt desc)
-      `);
+const POSTS_PER_PAGE = 6;
+
+export default function BlogPage() {
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [totalPosts, setTotalPosts] = useState(0);
+
+    useEffect(() => {
+        fetchPosts(true);
+    }, []);
+
+    const fetchPosts = async (reset = false) => {
+        const newPage = reset ? 1 : page;
+        const query = groq`{
+            "posts": *[_type == "post" && title match $searchTerm + "*"] | order(publishedAt desc) [${(newPage - 1) * POSTS_PER_PAGE}...${newPage * POSTS_PER_PAGE}] {
+                _id,
+                title,
+                slug,
+                mainImage,
+                excerpt,
+                "authorName": author->name,
+                "authorImage": author->image,
+                publishedAt,
+                "estimatedReadingTime": round(length(pt::text(body)) / 5 / 200),
+                "categories": categories[]->title
+            },
+            "total": count(*[_type == "post" && title match $searchTerm + "*"])
+        }`;
+        const results = await client.fetch<{ posts: Post[], total: number }>(query, { searchTerm: searchTerm });
+
+        if (reset) {
+            setPosts(results.posts);
+        } else {
+            setPosts(prevPosts => [...prevPosts, ...results.posts]);
+        }
+        setTotalPosts(results.total);
+        setHasMore(results.posts.length === POSTS_PER_PAGE && (newPage * POSTS_PER_PAGE) < results.total);
+        setPage(newPage + 1);
+    };
+
+    const handleSearch = () => {
+        fetchPosts(true);
+    };
+
+    const handleLoadMore = () => {
+        fetchPosts();
+    };
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <header className="bg-white py-4 sticky top-0 z-10 shadow-sm">
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <div className="flex items-center space-x-2">
-
-                        <Brain className="h-8 w-8 text-blue-600" />
-                        <Link href="/"><h1 className="text-2xl font-bold">Generative AI Guide</h1></Link>
-
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Link href="/blog">Blog</Link>
-                    </div>
-                </div>
-            </header>
-            <main className="container mx-auto px-4 py-8">
-                <div className="mb-8">
+        <div className="min-h-screen flex flex-col bg-gray-100">
+            <NavBar />
+            <main className="container mx-auto px-4 py-8 flex-grow">
+                <div className="mb-8 flex">
                     <Input
-                        className="max-w-md"
+                        className="max-w-md mr-2"
                         placeholder="Search articles..."
                         type="search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     />
+                    <Button onClick={handleSearch}>Search</Button>
                 </div>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {posts.map((post) => (
@@ -109,11 +136,19 @@ export default async function BlogPage() {
                         </Card>
                     ))}
                 </div>
-                <div className="mt-12 text-center">
-                    <Button variant="outline">Load More Articles</Button>
-                </div>
+                {hasMore && (
+                    <div className="mt-12 text-center">
+                        <Button variant="outline" onClick={handleLoadMore}>Load More Articles</Button>
+                    </div>
+                )}
+                {posts.length === 0 && (
+                    <p className="text-center text-gray-500 mt-8">No articles found.</p>
+                )}
+                <p className="text-center text-gray-500 mt-4">
+                    Showing {posts.length} of {totalPosts} articles
+                </p>
             </main>
-            <footer className="bg-white shadow mt-12">
+            <footer className="bg-white shadow mt-auto">
                 <div className="container mx-auto px-4 py-6 text-center text-gray-600">
                     <p>&copy; 2024 Shamim Bhuiyan and Timur Isachenko. All rights reserved.</p>
                 </div>
