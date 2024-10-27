@@ -41,41 +41,41 @@ const content = {
     "title": "What's Inside the Book",
     "tabs": [
       {
-      id: 'local-llm',
-      title: 'Local LLM Setup',
-      description: 'Learn how to set up and use Local LLMs efficiently for AI development.',
-      imageUrl: '/images/local-llm.jpg',
-      features: [
-        "Install and configure local models using tools like Ollama",
-        "Run LLMs on local hardware with minimal setup",
-        "Fine-tune models for specific use cases",
-        "Efficiently use tools like Python and Hugging Face to work with LLMs",
-      ],
-    },
-    {
-      "id": 'agents',
-      "title": 'AI Agents',
-      "description": 'Discover how AI agents can automate tasks and enhance your productivity.',
-      "imageUrl": '/images/ai-agents.jpg',
-      "features": [
-        "Develop AI agents to handle repetitive tasks",
-        "Integrate agents with real-world applications",
-        "Use AI agents for content creation and business operations",
-        "Architect multi-agent systems for complex scenarios",
-      ],
-    },
-    {
-      "id": 'rag',
-      "title": 'Advanced Techniques',
-      "description": 'Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.',
-      "imageUrl": '/images/advanced-techniques.jpg',
-      "features": [
-        "Enrich LLMs with private datasets for better accuracy",
-        "Apply RAG techniques to enhance model outputs",
-        "Integrate LLMs with SQL databases for Text-to-SQL queries",
-        "Use fine-tuning methods like LoRA and QLoRA for efficiency",
-      ],
-    }
+        id: 'local-llm',
+        title: 'Local LLM Setup',
+        description: 'Learn how to set up and use Local LLMs efficiently for AI development.',
+        imageUrl: '/images/local-llm.jpg',
+        features: [
+          "Install and configure local models using tools like Ollama",
+          "Run LLMs on local hardware with minimal setup",
+          "Fine-tune models for specific use cases",
+          "Efficiently use tools like Python and Hugging Face to work with LLMs",
+        ],
+      },
+      {
+        "id": 'agents',
+        "title": 'AI Agents',
+        "description": 'Discover how AI agents can automate tasks and enhance your productivity.',
+        "imageUrl": '/images/ai-agents.jpg',
+        "features": [
+          "Develop AI agents to handle repetitive tasks",
+          "Integrate agents with real-world applications",
+          "Use AI agents for content creation and business operations",
+          "Architect multi-agent systems for complex scenarios",
+        ],
+      },
+      {
+        "id": 'rag',
+        "title": 'Advanced Techniques',
+        "description": 'Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.',
+        "imageUrl": '/images/advanced-techniques.jpg',
+        "features": [
+          "Enrich LLMs with private datasets for better accuracy",
+          "Apply RAG techniques to enhance model outputs",
+          "Integrate LLMs with SQL databases for Text-to-SQL queries",
+          "Use fine-tuning methods like LoRA and QLoRA for efficiency",
+        ],
+      }
     ],
     "featureCards": [
       {
@@ -174,8 +174,33 @@ const content = {
   },
   "roadmapSection": {
     "title": "Roadmap to Generative AI",
-    "description": "A step-by-step guide to master local LLM development",
+    "description": "A step-by-step guide for mastering AI driven application with  local LLM inference?",
     "imageAlt": "Comprehensive Generative AI Development Roadmap"
+  },
+  "whyOutstandingSection": {
+    "title": "Why This Book Is Different",
+    "mainPoints": [
+      {
+        "title": "100% Practical Approach",
+        "description": "Unlike theoretical books, we focus on hands-on development with local LLMs, making AI accessible to everyone."
+      },
+      {
+        "title": "Lifetime Free Updates",
+        "description": "Get free updates as the AI landscape evolves, ensuring your knowledge stays current with the latest developments."
+      },
+      {
+        "title": "60-Day Money-Back Guarantee",
+        "description": "Try the book risk-free. If you're not completely satisfied, get a 100% refund within 60 days."
+      },
+      {
+        "title": "Real-World Applications",
+        "description": "Build practical AI applications including RAG systems, SQL integration, and autonomous AI agents."
+      }
+    ],
+    "callToAction": {
+      "price": "Starting at $19",
+      "buttonText": "Get Started Today"
+    }
   }
 }
 
@@ -233,30 +258,62 @@ function RandomizedTextEffect({ text }: AnimatedTextProps) {
   return <div className='relative inline-block'>{animatedText}</div>;
 }
 
+function WhyOutstandingSection() {
+  return (
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-6">{content.whyOutstandingSection.title}</h2>
+            <p className="text-xl text-blue-600 font-semibold">
+              &quot;You don&apos;t need to be a machine learning expert to learn Generative AI&quot;
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {content.whyOutstandingSection.mainPoints.map((point, index) => (
+              <Card key={index} className="transform hover:scale-105 transition-transform duration-200">
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold text-blue-600">
+                    {point.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{point.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 text-center">
+            <p className="text-2xl font-bold text-gray-800 mb-4">
+              Ready to Master Generative AI?
+            </p>
+            <p className="text-lg text-gray-600 mb-6">
+              Join readers who are already building their own AI applications with local LLM inference.
+            </p>
+            <div className="flex flex-col items-center space-y-4">
+              <p className="text-3xl font-bold text-blue-600">
+                {content.whyOutstandingSection.callToAction.price}
+              </p>
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8"
+                onClick={() => window.open("https://leanpub.com/quickstartwithai", "_blank", "noopener,noreferrer")}
+              >
+                {content.whyOutstandingSection.callToAction.buttonText}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function EnhancedLandingPageComponent() {
 
   const [showContactForm, setShowContactForm] = useState(false);
-
-  // function Header() {
-  //   return (
-  //     <header className="bg-white py-4 sticky top-0 z-50 shadow-sm">
-  //       <div className="container mx-auto px-4 flex justify-between items-center">
-  //         <div className="flex items-center space-x-2">
-  //           <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
-  //           <h1 className="text-lg sm:text-2xl font-bold">{content.header.title} <span className="inline-block text-blue-600">{content.header.subtitle}</span></h1>
-  //         </div>
-  //         <nav className="hidden md:flex space-x-4">
-  //           {Object.entries(content.header.navLinks).map(([key, value]) => (
-  //             <a key={key} href={`#${key}`} className="text-gray-600 hover:text-blue-600">{value}</a>
-  //           ))}
-  //         </nav>
-  //         <Button variant="outline" onClick={() => setShowContactForm(true)} className="hidden sm:block">
-  //           {content.header.contactButton}
-  //         </Button>
-  //       </div>
-  //     </header>
-  //   );
-  // }
 
   function HeroSection() {
     return (
@@ -538,6 +595,7 @@ export function EnhancedLandingPageComponent() {
           </div>
         </AuroraBackground>
         <RoadmapSection />
+        <WhyOutstandingSection />
         <FeaturesSection />
         <AuthorsSection />
         <CallToActionSection />
