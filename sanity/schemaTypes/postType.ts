@@ -1,15 +1,7 @@
 import {DocumentTextIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType, StringInputProps} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 import CodeInput from '@/sanity/components/CodeInput'
 
-const codeField = defineField({
-  name: 'code',
-  title: 'Code',
-  type: 'text',
-  components: {
-    input: CodeInput as React.ComponentType<StringInputProps>
-  }
-})
 
 export const postType = defineType({
   name: 'post',
@@ -98,7 +90,14 @@ export const postType = defineType({
               title: 'Language',
               type: 'string',
             },
-            codeField,
+            {
+              name: 'code',
+              title: 'Code',
+              type: 'text',
+              components: {
+                input: CodeInput,
+              },
+            },
             {
               name: 'filename',
               title: 'Filename',
