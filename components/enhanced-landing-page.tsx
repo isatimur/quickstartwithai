@@ -12,6 +12,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background';
 import { Cover } from '@/components/ui/cover'
 import { NavBar } from '@/components/NavBar'
 import { useEffect, useCallback } from 'react'
+import { TestimonialsSection } from '@/components/testimonials-section'
 
 const content = {
   "header": {
@@ -201,6 +202,18 @@ const content = {
       "price": "Starting at $19",
       "buttonText": "Get Started Today"
     }
+  },
+  "testimonialsSection": {
+    "title": "Reader Testimonials",
+    "testimonials": [
+      {
+        "content": "In contrast to my book AI Driven, which targets CxOs, Timur's book offers practical insights for architects and developers. I had the privilege of reading a pre-release version, and as an engineer at heart, I found it easy to follow from chapter to chapter. Highly recommended!",
+        "author": "Victor Shilo",
+        "role": "Author of the book \"AI Driven\"",
+        "image": "/images/testimonials/victor-shilo.jpg"
+      },
+      // ... other testimonials ...
+    ]
   }
 }
 
@@ -597,6 +610,7 @@ export function EnhancedLandingPageComponent() {
         <RoadmapSection />
         <WhyOutstandingSection />
         <FeaturesSection />
+        <TestimonialsSection />
         <AuthorsSection />
         <CallToActionSection />
       </main>
