@@ -16,8 +16,54 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "The book 'Getting started with Generative AI'",
-  description: "Learn how to build your own AI application step-by-step. A hands-on guide to AI development with local LLM",
+  metadataBase: new URL('https://quickstartgenai.com'),
+  title: {
+    default: "Local LLM Development Guide: Build AI Applications Without ML Expertise",
+    template: "%s | Practical Generative AI Development"
+  },
+  description: "Learn to build production-ready AI applications with local LLM inference. Step-by-step guide for developers covering RAG, AI agents, and practical implementations without cloud dependencies.",
+  keywords: [
+    "local LLM development",
+    "AI application development",
+    "RAG implementation",
+    "AI agents tutorial",
+    "generative AI guide",
+    "LLM inference",
+    "practical AI development",
+    "machine learning for developers",
+    "local AI deployment",
+    "AI without cloud",
+    "Python AI development",
+    "LangChain tutorial",
+    "llama.cpp guide",
+    "AI application architecture",
+    "enterprise AI development"
+  ],
+  alternates: {
+    canonical: 'https://quickstartgenai.com'
+  },
+  authors: [
+    { name: "Shamim Bhuiyan" },
+    { name: "Timur Isachenko" }
+  ],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://quickstartwithai.com',
+    siteName: 'Getting Started with Generative AI',
+    images: [{
+      url: '/og-image.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'Getting Started with Generative AI Book Cover'
+    }]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Getting Started with Generative AI - Local LLM Development Guide',
+    description: 'Master Generative AI development with local LLM inference. A practical guide for developers.',
+    images: ['/og-image.jpg']
+  }
 };
 
 export default function RootLayout({

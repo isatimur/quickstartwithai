@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import generateStructuredData from './structured-data'
 
 const EnhancedLandingPageComponent = dynamic(
   () => import('@/components/enhanced-landing-page').then(mod => mod.EnhancedLandingPageComponent),
@@ -6,5 +7,13 @@ const EnhancedLandingPageComponent = dynamic(
 )
 
 export default function Page() {
-  return <EnhancedLandingPageComponent />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateStructuredData()) }}
+      />
+      <EnhancedLandingPageComponent />
+    </>
+  )
 }
