@@ -1,11 +1,28 @@
 import { MetadataRoute } from 'next'
+import { client } from '@/sanity/lib/client'
+import { groq } from 'next-sanity'
+import { faqCategories } from '@/lib/constants/faq-data'
 
-type ChangeFreq = 'weekly' | 'daily' | 'monthly' | 'always' | 'hourly' | 'yearly' | 'never';
+type ChangeFreq = 'weekly' | 'daily' | 'monthly' | 'always' | 'hourly' | 'yearly' | 'never'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getBlogPosts() {
+    const query = groq`*[_type == "post"] {
+        "slug": slug.current,
+        _updatedAt
+    }`
+    const posts = await client.fetch(query)
+    return posts.map((post: { slug: string; _updatedAt: string }) => ({
+        url: `https://quickstartgenai.com/blog/${post.slug}`,
+        lastModified: new Date(post._updatedAt),
+        changeFrequency: 'weekly' as ChangeFreq,
+        priority: 0.7,
+    }))
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://quickstartgenai.com'
+    const blogPosts = await getBlogPosts()
 
-    // Core pages
     const mainPages = [
         {
             url: baseUrl,
@@ -27,59 +44,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ]
 
-    // FAQ Categories
-    const faqCategories = [
-        'basics',
-        'technical',
-        'applications',
-        'ethics',
-        'development'
-    ].map(category => ({
+    const faqPages = faqCategories.map(category => ({
         url: `${baseUrl}/faq/${category}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as ChangeFreq,
         priority: 0.6,
     }))
 
-    // Book sections
-    const bookSections = [
-        'features',
-        'authors',
-        'testimonials',
-        'sample-chapter'
-    ].map(section => ({
-        url: `${baseUrl}/#${section}`,
+    const staticPages = [
+        'privacy-policy',
+        'terms',
+        'contact'
+    ].map(page => ({
+        url: `${baseUrl}/${page}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as ChangeFreq,
-        priority: 0.9,
+        priority: 0.3,
     }))
-
-    // Additional resources
-    const resources = [
-        {
-            url: `${baseUrl}/privacy-policy`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly' as ChangeFreq,
-            priority: 0.3,
-        },
-        {
-            url: `${baseUrl}/terms`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly' as ChangeFreq,
-            priority: 0.3,
-        },
-        {
-            url: `${baseUrl}/contact`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly' as ChangeFreq,
-            priority: 0.5,
-        }
-    ]
 
     return [
         ...mainPages,
-        ...faqCategories,
-        ...bookSections,
-        ...resources
+        ...faqPages,
+        ...blogPosts,
+        ...staticPages,
     ]
 }
