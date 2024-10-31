@@ -22,17 +22,7 @@ const ThreeDBookSection = dynamic(
   () => import('@/components/3d-book-section').then(mod => mod.ThreeDBookSection),
   { ssr: false }
 )
-const MobileBookPreview = () => (
-  <div className="relative w-full aspect-[3/4] max-w-sm mx-auto">
-    <Image
-      src="/book-cover.webp"
-      alt="Getting Started with Generative AI Book Cover"
-      fill
-      className="object-cover rounded-lg shadow-2xl"
-      priority
-    />
-  </div>
-)
+
 const content = {
   "header": {
     "title": "Getting started with ",
@@ -640,16 +630,10 @@ export function EnhancedLandingPageComponent() {
         <RoadmapSection />
         <WhyOutstandingSection />
         <FeaturesSection />
-        {isDesktop ? (
-          <section className="h-[600px] w-full">
-            <Suspense fallback={<div>Loading 3D Book...</div>}>
-              <ThreeDBookSection />
-            </Suspense>
-          </section>
-        ) : (
-          <section className="py-12 px-4">
-            <MobileBookPreview />
-          </section>
+        {isDesktop && (
+          <Suspense fallback={<div>Loading 3D Book...</div>}>
+            <ThreeDBookSection />
+          </Suspense>
         )}
         <TestimonialsSection />
         <AuthorsSection />
