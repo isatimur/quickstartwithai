@@ -13,6 +13,7 @@ const allNavLinks = [
     { name: 'Blog', href: '/blog' },
     { name: 'Features', href: '/#features' },
     { name: 'Authors', href: '/#authors' },
+    { name: 'FAQ', href: '/faq' },
 ]
 
 export function NavBar() {
