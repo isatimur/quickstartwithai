@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ChevronRight, Users, Mail } from 'lucide-react'
+import { ChevronRight, Linkedin, Globe } from 'lucide-react'
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { Cover } from '@/components/ui/cover'
 import { NavBar } from '@/components/NavBar'
@@ -126,13 +126,17 @@ const content = {
         "name": "Shamim Bhuiyan",
         "role": "Enterprise Architect",
         "bio": "With 23 years of experience, Shamim specializes in designing high-load and highly scalable IT systems.",
-        "image": "/shamim.webp"
+        "image": "/shamim.webp",
+        "website": "https://shamimbhuiyan.ru",
+        "linkedin": "https://www.linkedin.com/in/shamimbhuiyan/"
       },
       {
         "name": "Timur Isachenko",
         "role": "Technical Lead & Solution Architect",
         "bio": "With 15 years of experience, Timur is known for his expertise in backend development and microservices architecture.",
-        "image": "/timur_isachenko.webp"
+        "image": "/timur_isachenko.webp",
+        "website": "https://timurisa.com",
+        "linkedin": "https://www.linkedin.com/in/timur-isachenko/"
       }
     ]
   },
@@ -470,7 +474,7 @@ export function EnhancedLandingPageComponent() {
     );
   }
 
-  function AuthorCard({ author }: { author: { name: string, role: string, bio: string, image: string } }) {
+  function AuthorCard({ author }: { author: { name: string, role: string, bio: string, image: string, website: string, linkedin: string } }) {
     return (
       <Card className="flex flex-col md:flex-row overflow-hidden">
         <Image src={author.image} alt={author.name} width={200} height={200} className="object-cover md:w-1/3" />
@@ -479,11 +483,11 @@ export function EnhancedLandingPageComponent() {
           <CardDescription className="mb-4">{author.role}</CardDescription>
           <p className="mb-4">{author.bio}</p>
           <div className="flex space-x-4">
-            <a href="#" className="text-blue-600 hover:text-blue-800">
-              <Users className="h-6 w-6" />
+            <a href={author?.website || ''} className="text-blue-600 hover:text-blue-800">
+              <Globe className="h-6 w-6" />
             </a>
-            <a href="#" className="text-blue-600 hover:text-blue-800">
-              <Mail className="h-6 w-6" />
+            <a href={author?.linkedin || ''} className="text-blue-600 hover:text-blue-800">
+              <Linkedin className="h-6 w-6" />
             </a>
           </div>
         </CardContent>
