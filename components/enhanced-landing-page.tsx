@@ -152,15 +152,15 @@ const content = {
       "links": [
         { "name": "Features", "href": "#features" },
         { "name": "Authors", "href": "#authors" },
-        { "name": "Articles", "href": "#articles" }
+        { "name": "Articles", "href": "/blog" }
       ]
     },
     "connect": {
       "title": "Connect",
       "links": [
-        { "name": "Twitter", "href": "#" },
+        { "name": "X.com", "href": "#" },
         { "name": "LinkedIn", "href": "#" },
-        { "name": "GitHub", "href": "#" }
+        { "name": "GitHub", "href": "https://github.com/srecon/Getting_started_with_AI" }
       ]
     },
     "legal": {
