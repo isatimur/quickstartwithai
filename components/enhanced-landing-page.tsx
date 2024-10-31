@@ -13,6 +13,14 @@ import { Cover } from '@/components/ui/cover'
 import { NavBar } from '@/components/NavBar'
 import { useEffect, useCallback } from 'react'
 import { TestimonialsSection } from '@/components/testimonials-section'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+
+
+const ThreeDBookSection = dynamic(
+  () => import('@/components/3d-book-section').then(mod => mod.ThreeDBookSection),
+  { ssr: false }
+)
 
 const content = {
   "header": {
@@ -123,7 +131,7 @@ const content = {
       {
         "name": "Timur Isachenko",
         "role": "Technical Lead & Solution Architect",
-        "bio": "With 14 years of experience, Timur is known for his expertise in backend development and microservices architecture.",
+        "bio": "With 15 years of experience, Timur is known for his expertise in backend development and microservices architecture.",
         "image": "/timur_isachenko.webp"
       }
     ]
@@ -212,7 +220,6 @@ const content = {
         "role": "Author of the book \"AI Driven\"",
         "image": "/images/testimonials/victor-shilo.jpg"
       },
-      // ... other testimonials ...
     ]
   }
 }
@@ -610,6 +617,9 @@ export function EnhancedLandingPageComponent() {
         <RoadmapSection />
         <WhyOutstandingSection />
         <FeaturesSection />
+        <Suspense fallback={<div>Loading 3D Book...</div>}>
+          <ThreeDBookSection />
+        </Suspense>
         <TestimonialsSection />
         <AuthorsSection />
         <CallToActionSection />
