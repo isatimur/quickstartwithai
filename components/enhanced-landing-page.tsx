@@ -15,13 +15,24 @@ import { useEffect, useCallback } from 'react'
 import { TestimonialsSection } from '@/components/testimonials-section'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
+import { useMediaQuery } from '@/hooks/use-media-query' // We'll create this hook
 
 
 const ThreeDBookSection = dynamic(
   () => import('@/components/3d-book-section').then(mod => mod.ThreeDBookSection),
   { ssr: false }
 )
-
+const MobileBookPreview = () => (
+  <div className="relative w-full aspect-[3/4] max-w-sm mx-auto">
+    <Image
+      src="/book-cover.webp"
+      alt="Getting Started with Generative AI Book Cover"
+      fill
+      className="object-cover rounded-lg shadow-2xl"
+      priority
+    />
+  </div>
+)
 const content = {
   "header": {
     "title": "Getting started with ",
@@ -336,9 +347,17 @@ function WhyOutstandingSection() {
 }
 
 export function EnhancedLandingPageComponent() {
+  const isDesktop = useMediaQuery('(min-width: 768px)')
+  const [mounted, setMounted] = useState(false)
 
   const [showContactForm, setShowContactForm] = useState(false);
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+
+  if (!mounted) return null
   function HeroSection() {
     return (
       <section className="pt-12 sm:pt-24 pb-12 sm:pb-24">
@@ -621,9 +640,17 @@ export function EnhancedLandingPageComponent() {
         <RoadmapSection />
         <WhyOutstandingSection />
         <FeaturesSection />
-        <Suspense fallback={<div>Loading 3D Book...</div>}>
-          <ThreeDBookSection />
-        </Suspense>
+        {isDesktop ? (
+          <section className="h-[600px] w-full">
+            <Suspense fallback={<div>Loading 3D Book...</div>}>
+              <ThreeDBookSection />
+            </Suspense>
+          </section>
+        ) : (
+          <section className="py-12 px-4">
+            <MobileBookPreview />
+          </section>
+        )}
         <TestimonialsSection />
         <AuthorsSection />
         <CallToActionSection />
