@@ -44,13 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ]
 
-    const faqPages = faqCategories.map(category => ({
-        url: `${baseUrl}/faq/${category}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as ChangeFreq,
-        priority: 0.6,
-    }))
-
     const staticPages = [
         'privacy-policy',
         'terms',
@@ -64,7 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [
         ...mainPages,
-        ...faqPages,
         ...blogPosts,
         ...staticPages,
     ]
