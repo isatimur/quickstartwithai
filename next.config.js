@@ -2,6 +2,8 @@
 module.exports = {
     swcMinify: false,
     reactStrictMode: true,
+    compress: true,
+    poweredByHeader: false,
     images: {
         remotePatterns: [
             {

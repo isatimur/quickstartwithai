@@ -1,10 +1,11 @@
 {
   "name": "quickstartwithai",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:css": "tailwindcss -i ./app/globals.css -o ./public/styles/critical.css --minify",
     "start": "next start",
     "lint": "next lint"
   },
