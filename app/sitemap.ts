@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next'
 import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
-import { faqCategories } from '@/lib/constants/faq-data'
 
 type ChangeFreq = 'weekly' | 'daily' | 'monthly' | 'always' | 'hourly' | 'yearly' | 'never'
 
