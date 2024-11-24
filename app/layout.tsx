@@ -50,17 +50,17 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://quickstartwithai.com',
-    siteName: 'Getting Started with Generative AI',
+    siteName: 'Generative AI with Local LLM',
     images: [{
       url: '/og-image.jpg',
       width: 1200,
       height: 630,
-      alt: 'Getting Started with Generative AI Book Cover'
+      alt: 'Generative AI with Local LLM - Book Cover'
     }]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Getting Started with Generative AI - Local LLM Development Guide',
+    title: 'Generative AI - Local LLM Development Guide',
     description: 'Master Generative AI development with local LLM inference. A practical guide for developers.',
     images: ['/og-image.jpg']
   }

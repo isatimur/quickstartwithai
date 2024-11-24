@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import { cn } from "@/lib/utils"
 
-// Add more testimonials with diverse roles and perspectives
 const testimonials = [
     {
         content: "In contrast to my book AI Driven, which targets CxOs, Timur's book offers practical insights for architects and developers. I had the privilege of reading a pre-release version, and as an engineer at heart, I found it easy to follow from chapter to chapter. Highly recommended!",
@@ -17,10 +16,10 @@ const testimonials = [
         rating: 5
     },
     {
-        content: "As a Software Architect with 15+ years of experience, I appreciate how this book bridges the gap between theory and practice. The local LLM setup guide alone saved our team weeks of research.",
-        author: "Sarah Chen",
-        role: "Principal Software Architect at TechCorp",
-        image: "/images/testimonials/sarah-chen.jpg",
+        content: "I really appreciated the effort to explain key concepts and break down the symbolism behind them. Including a code base was a huge plus—it made everything feel solid and practical. The examples were clear and easy to follow, making the learning experience enjoyable and effective.",
+        author: "Lucy Tai",
+        role: "Data Scientist at Growth Engine AI",
+        image: "/images/testimonials/lucy-tai.jpg",
         rating: 4
     },
     {

@@ -36,7 +36,7 @@ export function NavBar() {
                 <Link href="/" className="flex items-center space-x-2">
                     <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
                     <h1 className="text-lg sm:text-2xl font-bold">
-                        Getting started with <span className="inline-block text-blue-600">Generative AI</span>
+                        Generative AI with <span className="inline-block text-blue-600">Local LLM</span>
                     </h1>
                 </Link>
 

@@ -25,8 +25,8 @@ const ThreeDBookSection = dynamic(
 
 const content = {
   "header": {
-    "title": "Getting started with ",
-    "subtitle": "Generative AI", // Ensure this exists if you're using it
+    "title": "Generative AI with",
+    "subtitle": "Local LLM", // Ensure this exists if you're using it
     "navLinks": {
       "features": "Features",
       "authors": "Authors",
@@ -225,6 +225,12 @@ const content = {
         "role": "Author of the book \"AI Driven\"",
         "image": "/images/testimonials/victor-shilo.jpg"
       },
+      {
+        "content": "In contrast to my book AI Driven, which targets CxOs, Timur's book offers practical insights for architects and developers. I had the privilege of reading a pre-release version, and as an engineer at heart, I found it easy to follow from chapter to chapter. Highly recommended!",
+        "author": "Lucy Tai",
+        "role": "NLP Engineer at StandupAI",
+        "image": "/images/testimonials/lucy-tai.jpg"
+      }
     ]
   }
 }
@@ -630,11 +636,11 @@ export function EnhancedLandingPageComponent() {
         <RoadmapSection />
         <WhyOutstandingSection />
         <FeaturesSection />
-        {isDesktop && (
-          <Suspense fallback={<div>Loading 3D Book...</div>}>
-            <ThreeDBookSection />
-          </Suspense>
-        )}
+        {/*{isDesktop && (*/}
+        {/*  <Suspense fallback={<div>Loading 3D Book...</div>}>*/}
+        {/*    <ThreeDBookSection />*/}
+        {/*  </Suspense>*/}
+        {/*)}*/}
         <TestimonialsSection />
         <AuthorsSection />
         <CallToActionSection />

@@ -2,7 +2,7 @@ export default function generateStructuredData() {
     return {
         "@context": "https://schema.org",
         "@type": "Book",
-        "name": "Getting Started with Generative AI",
+        "name": "Generative AI with Local LLM",
         "alternateName": "Local LLM Development Guide",
         "author": [
             {
