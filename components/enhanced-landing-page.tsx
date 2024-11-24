@@ -13,15 +13,6 @@ import { Cover } from '@/components/ui/cover'
 import { NavBar } from '@/components/NavBar'
 import { useEffect, useCallback } from 'react'
 import { TestimonialsSection } from '@/components/testimonials-section'
-import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
-import { useMediaQuery } from '@/hooks/use-media-query' // We'll create this hook
-
-
-const ThreeDBookSection = dynamic(
-  () => import('@/components/3d-book-section').then(mod => mod.ThreeDBookSection),
-  { ssr: false }
-)
 
 const content = {
   "header": {
@@ -343,7 +334,6 @@ function WhyOutstandingSection() {
 }
 
 export function EnhancedLandingPageComponent() {
-  const isDesktop = useMediaQuery('(min-width: 768px)')
   const [mounted, setMounted] = useState(false)
 
   const [showContactForm, setShowContactForm] = useState(false);
@@ -636,11 +626,6 @@ export function EnhancedLandingPageComponent() {
         <RoadmapSection />
         <WhyOutstandingSection />
         <FeaturesSection />
-        {/*{isDesktop && (*/}
-        {/*  <Suspense fallback={<div>Loading 3D Book...</div>}>*/}
-        {/*    <ThreeDBookSection />*/}
-        {/*  </Suspense>*/}
-        {/*)}*/}
         <TestimonialsSection />
         <AuthorsSection />
         <CallToActionSection />
