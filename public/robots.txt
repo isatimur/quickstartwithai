@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+# Prevent indexing of API routes
+Disallow: /api/
+
+# Prevent indexing of admin routes
+Disallow: /admin/
+Disallow: /studio/
+
+# Sitemap location
 Sitemap: https://quickstartgenai.com/sitemap.xml

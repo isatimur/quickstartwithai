@@ -1,62 +1,61 @@
 import { MetadataRoute } from 'next'
-import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
-
-type ChangeFreq = 'weekly' | 'daily' | 'monthly' | 'always' | 'hourly' | 'yearly' | 'never'
-
-async function getBlogPosts() {
-    const query = groq`*[_type == "post"] {
-        "slug": slug.current,
-        _updatedAt
-    }`
-    const posts = await client.fetch(query)
-    return posts.map((post: { slug: string; _updatedAt: string }) => ({
-        url: `https://quickstartgenai.com/blog/${post.slug}`,
-        lastModified: new Date(post._updatedAt),
-        changeFrequency: 'weekly' as ChangeFreq,
-        priority: 0.7,
-    }))
-}
+import { client } from '@/sanity/lib/client'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://quickstartgenai.com'
-    const blogPosts = await getBlogPosts()
+    const posts = await client.fetch(groq`
+    *[_type == "post"] {
+      "slug": slug.current,
+      _updatedAt
+    }
+  `)
 
-    const mainPages = [
+    const baseUrl = 'https://quickstartgenai.com'
+
+    // Base routes
+    const routes = [
         {
             url: baseUrl,
             lastModified: new Date(),
-            changeFrequency: 'weekly' as ChangeFreq,
+            changeFrequency: 'weekly' as const,
             priority: 1,
         },
         {
             url: `${baseUrl}/blog`,
             lastModified: new Date(),
-            changeFrequency: 'daily' as ChangeFreq,
-            priority: 0.8,
+            changeFrequency: 'daily' as const,
+            priority: 0.9,
         },
         {
             url: `${baseUrl}/faq`,
             lastModified: new Date(),
-            changeFrequency: 'weekly' as ChangeFreq,
-            priority: 0.7,
+            changeFrequency: 'weekly' as const,
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/privacy-policy`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.5,
+        },
+        {
+            url: `${baseUrl}/terms`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.5,
         },
     ]
+    interface Post {
+        slug: string;
+        _updatedAt: string;
+    }
 
-    const staticPages = [
-        'privacy-policy',
-        'terms',
-        'contact'
-    ].map(page => ({
-        url: `${baseUrl}/${page}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as ChangeFreq,
-        priority: 0.3,
+    const postUrls = posts.map((post: Post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(post._updatedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
     }))
 
-    return [
-        ...mainPages,
-        ...blogPosts,
-        ...staticPages,
-    ]
+    return [...routes, ...postUrls]
 }

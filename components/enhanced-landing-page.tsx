@@ -165,7 +165,7 @@ const content = {
       "title": "Join our Mailing List",
       "subscribeButton": "Subscribe"
     },
-    "copyright": "© 2024 Shamim Bhuiyan & Timur Isachenko. All rights reserved."
+    "copyright": "© 2025 Shamim Bhuiyan & Timur Isachenko. All rights reserved."
   },
   "contactFormDialog": {
     "title": "Contact Authors",

@@ -12,23 +12,23 @@ const testimonials = [
         content: "In contrast to my book AI Driven, which targets CxOs, Timur's book offers practical insights for architects and developers. I had the privilege of reading a pre-release version, and as an engineer at heart, I found it easy to follow from chapter to chapter. Highly recommended!",
         author: "Victor Shilo",
         role: "Author of the book \"AI Driven\"",
-        image: "/images/testimonials/victor-shilo.jpg",
+        image: "/images/testimonials/victor-shilo.webp",
         rating: 5
     },
     {
         content: "I really appreciated the effort to explain key concepts and break down the symbolism behind them. Including a code base was a huge plus—it made everything feel solid and practical. The examples were clear and easy to follow, making the learning experience enjoyable and effective.",
         author: "Lucy Tai",
         role: "Data Scientist at Growth Engine AI",
-        image: "/images/testimonials/lucy-tai.jpg",
+        image: "/images/testimonials/lucy-tai.jpeg",
         rating: 4
     },
-    {
-        content: "Finally, a book that doesn't just scratch the surface! The RAG implementation chapter transformed how we handle document processing at our startup.",
-        author: "Michael Rodriguez",
-        role: "CTO at AI Innovations",
-        image: "/images/testimonials/michael-rodriguez.jpg",
-        rating: 5
-    },
+    // {
+    //     content: "Finally, a book that doesn't just scratch the surface! The RAG implementation chapter transformed how we handle document processing at our startup.",
+    //     author: "Michael Rodriguez",
+    //     role: "CTO at AI Innovations",
+    //     image: "/images/testimonials/michael-rodriguez.jpg",
+    //     rating: 5
+    // },
 ];
 
 export function TestimonialsSection() {
