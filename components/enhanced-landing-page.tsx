@@ -17,7 +17,7 @@ import { TestimonialsSection } from '@/components/testimonials-section'
 const content = {
   "header": {
     "title": "Generative AI with",
-    "subtitle": "Local LLM", // Ensure this exists if you're using it
+    "subtitle": "Local LLM",
     "navLinks": {
       "features": "Features",
       "authors": "Authors",

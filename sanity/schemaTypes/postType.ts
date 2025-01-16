@@ -2,7 +2,6 @@ import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import CodeInput from '@/sanity/components/CodeInput'
 
-
 export const postType = defineType({
   name: 'post',
   title: 'Post',
@@ -53,10 +52,10 @@ export const postType = defineType({
       title: 'Body',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'block',
-        },
-        {
+        }),
+        defineArrayMember({
           type: 'image',
           fields: [
             {
@@ -79,31 +78,58 @@ export const postType = defineType({
               ],
             },
           ],
-        },
+        }),
         defineArrayMember({
-          type: 'object',
           name: 'code',
+          type: 'object',
           title: 'Code Block',
           fields: [
             {
-              name: 'language',
-              title: 'Language',
+              name: 'filename',
               type: 'string',
+              title: 'Filename',
             },
             {
-              name: 'code',
-              title: 'Code',
-              type: 'text',
-              components: {
-                input: CodeInput,
+              name: 'language',
+              type: 'string',
+              title: 'Language',
+              initialValue: 'text',
+              options: {
+                list: [
+                  { title: 'Text', value: 'text' },
+                  { title: 'JavaScript', value: 'javascript' },
+                  { title: 'TypeScript', value: 'typescript' },
+                  { title: 'Python', value: 'python' },
+                  { title: 'Bash', value: 'bash' },
+                  { title: 'JSON', value: 'json' },
+                  { title: 'HTML', value: 'html' },
+                  { title: 'CSS', value: 'css' },
+                  { title: 'YAML', value: 'yaml' },
+                ],
               },
             },
             {
-              name: 'filename',
-              title: 'Filename',
-              type: 'string',
+              name: 'code',
+              type: 'text',
+              title: 'Code',
+              rows: 10,
+              validation: Rule => Rule.required(),
             },
           ],
+          preview: {
+            select: {
+              language: 'language',
+              code: 'code',
+              filename: 'filename',
+            },
+            prepare(selection) {
+              const { language, code, filename } = selection;
+              return {
+                title: filename || language || 'Code Block',
+                subtitle: code ? code.slice(0, 50) + '...' : 'No code',
+              };
+            },
+          },
         }),
       ],
     }),
