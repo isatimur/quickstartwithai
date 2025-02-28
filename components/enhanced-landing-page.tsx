@@ -13,6 +13,7 @@ import { Cover } from '@/components/ui/cover'
 import { NavBar } from '@/components/NavBar'
 import { useEffect, useCallback } from 'react'
 import { TestimonialsSection } from '@/components/testimonials-section'
+import { LatestNewsSection } from '@/components/latest-news-section'
 
 const content = {
   "header": {
@@ -624,6 +625,7 @@ export function EnhancedLandingPageComponent() {
           </div>
         </AuroraBackground>
         <RoadmapSection />
+        <LatestNewsSection />
         <WhyOutstandingSection />
         <FeaturesSection />
         <TestimonialsSection />
