@@ -72,10 +72,10 @@ const content = {
         "description": 'Explore advanced AI techniques, including Retrieval-Augmented Generation (RAG) and more.',
         "imageUrl": '/images/advanced-techniques.jpg',
         "features": [
+          "Dive deeper into cutting-edge techniques like the Model Context Protocol (MCP), integrating local LLMs with remote models (Minions), and optimizing performance for edge computing",
+          "Explore advanced multi-model orchestration, and real-time AI applications",
           "Enrich LLMs with private datasets for better accuracy",
-          "Apply RAG techniques to enhance model outputs",
-          "Integrate LLMs with SQL databases for Text-to-SQL queries",
-          "Use fine-tuning methods like LoRA and QLoRA for efficiency",
+          "Apply RAG techniques to enhance model outputs"
         ],
       }
     ],
@@ -104,10 +104,10 @@ const content = {
         "title": "Master Advanced Techniques",
         "description": "Explore advanced AI techniques, including Fine-tuning, RAG and more.",
         "features": [
+          "Dive deeper into cutting-edge techniques like the Model Context Protocol (MCP), integrating local LLMs with remote models (Minions), and optimizing performance for edge computing",
+          "Explore advanced multi-model orchestration, and real-time AI applications",
           "Apply RAG techniques with private datasets for better accuracy",
-          "Integrate LLMs with SQL databases for Text-to-SQL queries",
-          "Practical examples of developing AI Agents",
-          "Fine-tuning LLMs (LoRA and QLoRA) for efficiency"
+          "Integrate LLMs with SQL databases for Text-to-SQL queries"
         ]
       }
     ]
