@@ -17,10 +17,22 @@ interface Post {
     _id: string;
     title: string;
     slug: { current: string };
-    mainImage: { asset: { _ref: string } };
+    mainImage: {
+        _type: 'image';
+        asset: {
+            _ref: string;
+            _type: 'reference';
+        };
+    };
     excerpt: string;
     authorName: string;
-    authorImage: { asset: { _ref: string } };
+    authorImage: {
+        _type: 'image';
+        asset: {
+            _ref: string;
+            _type: 'reference';
+        };
+    };
     publishedAt: string;
     estimatedReadingTime: number;
     categories: string[];
@@ -62,7 +74,7 @@ export default function BlogPage() {
         setTotalPosts(results.total);
         setHasMore(results.posts.length === POSTS_PER_PAGE && (newPage * POSTS_PER_PAGE) < results.total);
         setPage(newPage + 1);
-    }, [page, searchTerm]);
+    }, [searchTerm]);
 
     useEffect(() => {
         fetchPosts(true);
@@ -94,13 +106,15 @@ export default function BlogPage() {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {posts.map((post) => (
                         <Card key={post._id} className="overflow-hidden">
-                            <Image
-                                alt={post.title}
-                                className="object-cover w-full h-48"
-                                height={200}
-                                src={createImageUrlBuilder(client).image(post.mainImage).height(200).width(400).url()}
-                                width={400}
-                            />
+                            {post.mainImage && (
+                                <Image
+                                    alt={post.title}
+                                    className="object-cover w-full h-48"
+                                    height={200}
+                                    src={createImageUrlBuilder(client).image(post.mainImage).height(200).width(400).url()}
+                                    width={400}
+                                />
+                            )}
                             <CardHeader>
                                 <CardTitle>{post.title}</CardTitle>
                             </CardHeader>
@@ -117,7 +131,7 @@ export default function BlogPage() {
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap mt-2">
-                                    {post.categories.map((category) => (
+                                    {post.categories?.map((category) => (
                                         <span
                                             key={category}
                                             className="inline-flex items-center px-2 py-1 mr-2 mt-2 text-xs font-medium text-blue-800 bg-blue-100 rounded"
