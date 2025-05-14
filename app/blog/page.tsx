@@ -17,22 +17,10 @@ interface Post {
     _id: string;
     title: string;
     slug: { current: string };
-    mainImage: {
-        _type: 'image';
-        asset: {
-            _ref: string;
-            _type: 'reference';
-        };
-    };
+    mainImage: { asset: { _ref: string } } | null;
     excerpt: string;
     authorName: string;
-    authorImage: {
-        _type: 'image';
-        asset: {
-            _ref: string;
-            _type: 'reference';
-        };
-    };
+    authorImage: { asset: { _ref: string } } | null;
     publishedAt: string;
     estimatedReadingTime: number;
     categories: string[];
@@ -47,10 +35,9 @@ export default function BlogPage() {
     const [hasMore, setHasMore] = useState(true);
     const [totalPosts, setTotalPosts] = useState(0);
 
-    const fetchPosts = useCallback(async (reset = false) => {
-        const newPage = reset ? 1 : page;
+    const fetchPosts = useCallback(async (loadPage: number, isSearchReset: boolean = false) => {
         const query = groq`{
-            "posts": *[_type == "post" && title match $searchTerm + "*"] | order(publishedAt desc) [${(newPage - 1) * POSTS_PER_PAGE}...${newPage * POSTS_PER_PAGE}] {
+            "posts": *[_type == "post" && title match $searchTerm + "*"] | order(publishedAt desc) [${(loadPage - 1) * POSTS_PER_PAGE}...${loadPage * POSTS_PER_PAGE}] {
                 _id,
                 title,
                 slug,
@@ -66,26 +53,27 @@ export default function BlogPage() {
         }`;
         const results = await client.fetch<{ posts: Post[], total: number }>(query, { searchTerm: searchTerm });
 
-        if (reset) {
-            setPosts(results.posts);
-        } else {
-            setPosts(prevPosts => [...prevPosts, ...results.posts]);
-        }
+        setPosts(prevPosts => isSearchReset ? results.posts : [...prevPosts, ...results.posts]);
         setTotalPosts(results.total);
-        setHasMore(results.posts.length === POSTS_PER_PAGE && (newPage * POSTS_PER_PAGE) < results.total);
-        setPage(newPage + 1);
+        setHasMore(results.posts.length === POSTS_PER_PAGE && (loadPage * POSTS_PER_PAGE) < results.total);
+        
+        if (results.posts.length > 0 || isSearchReset) {
+            setPage(loadPage + 1);
+        }
     }, [searchTerm]);
 
     useEffect(() => {
-        fetchPosts(true);
+        setPage(1);
+        fetchPosts(1, true);
     }, [fetchPosts]);
 
     const handleSearch = () => {
-        fetchPosts(true);
+        setPage(1);
+        fetchPosts(1, true);
     };
 
     const handleLoadMore = () => {
-        fetchPosts();
+        fetchPosts(page);
     };
 
     return (
