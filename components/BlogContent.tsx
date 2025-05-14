@@ -3,6 +3,7 @@
 import React from 'react';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import Image from 'next/image';
+
 import { TypedObject } from '@portabletext/types';
 import { client } from '@/sanity/lib/client';
 import imageUrlBuilder from '@sanity/image-url';
