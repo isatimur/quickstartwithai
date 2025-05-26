@@ -8,7 +8,7 @@ const ContactPage: React.FC = () => {
       <div className="container mx-auto max-w-4xl px-4 py-10 sm:py-16">
         <header className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl font-bold text-primary tracking-tight">
-            Let's Build Together
+            Let&apos;s Build Together
           </h1>
         </header>
 
@@ -19,7 +19,7 @@ const ContactPage: React.FC = () => {
           <p className="text-lg text-muted-foreground leading-relaxed text-center sm:text-left">
             Partner with seasoned software engineers specializing in cutting-edge 
             Software Development, robust Architecture Design, and innovative AI 
-            Applications. We're dedicated to transforming your business vision 
+            Applications. We&apos;re dedicated to transforming your business vision 
             into reality through technology.
           </p>
         </section>
@@ -29,7 +29,7 @@ const ContactPage: React.FC = () => {
             Consultation Services
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-5 text-center sm:text-left">
-            Unlock your project's potential with our tailored consultation services:
+            Unlock your project&apos;s potential with our tailored consultation services:
           </p>
           <ul className="list-disc pl-5 text-lg text-muted-foreground space-y-2 leading-relaxed max-w-2xl mx-auto sm:mx-0">
             <li>Software architecture design and review</li>
