@@ -14,6 +14,7 @@ const allNavLinks = [
     { name: 'Features', href: '/#features' },
     { name: 'Authors', href: '/#authors' },
     { name: 'FAQ', href: '/faq' },
+    { name: 'Work with Us', href: '/contact' },
 ]
 
 export function NavBar() {
