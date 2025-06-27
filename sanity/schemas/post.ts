@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import {youTubeType} from '../schemaTypes/youTubeType'
 
 export default defineType({
     name: "post",
@@ -65,6 +66,10 @@ export default defineType({
                   language: 'python',
                   withFilename: true,
                 },
+              },
+              {
+                type: 'youTubeType',
+                title: 'YouTube Embed',
               },
             ],
         },

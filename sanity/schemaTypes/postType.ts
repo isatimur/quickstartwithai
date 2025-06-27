@@ -1,6 +1,7 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import CodeInput from '@/sanity/components/CodeInput'
+import {youTubeType} from '../schemaTypes/youTubeType'
 
 export const postType = defineType({
   name: 'post',
@@ -56,6 +57,10 @@ export const postType = defineType({
           type: 'block',
         }),
         defineArrayMember({
+          type: 'youTube',
+          title: 'YouTube Embed',
+        }),
+        defineArrayMember({
           type: 'image',
           fields: [
             {
@@ -79,6 +84,7 @@ export const postType = defineType({
             },
           ],
         }),
+
         defineArrayMember({
           name: 'code',
           type: 'object',
