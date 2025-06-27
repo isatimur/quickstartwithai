@@ -11,6 +11,8 @@ import dynamic from 'next/dynamic';
 import { useState, useEffect, useMemo } from 'react';
 import { dracula as draculaStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import { YouTubePreview } from '@/sanity/schemaTypes/youTubeType/YouTubePreview';
+import YouTubeEmbed from './YouTubeEmbed';
 
 const SyntaxHighlighter = dynamic<SyntaxHighlighterProps>(
   () => import('react-syntax-highlighter').then(mod => mod.PrismAsyncLight),
@@ -112,6 +114,7 @@ const BlogContent = React.memo(({ content }: BlogContentProps) => {
           </div>
         );
       },
+      youTube: ({ value }) => <YouTubeEmbed url={value.url} />,
     },
     block: {
       h1: ({ children, value }) => (
