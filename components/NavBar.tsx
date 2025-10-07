@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 const allNavLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'Blog', href: 'https://blog.quickstartgenai.com' },
     { name: 'Features', href: '/#features' },
     { name: 'Authors', href: '/#authors' },
     { name: 'FAQ', href: '/faq' },
@@ -20,7 +20,7 @@ export function NavBar() {
     const pathname = usePathname()
     const [navLinks, setNavLinks] = useState(allNavLinks)
     const [isOpen, setIsOpen] = useState(false)
-    const isBlogPage = pathname.startsWith('/blog')
+    const isBlogPage = false // Blog is now on subdomain
 
     useEffect(() => {
         if (isBlogPage) {
@@ -31,29 +31,33 @@ export function NavBar() {
     }, [isBlogPage])
 
     return (
-        <header className="bg-white py-4 sticky top-0 z-50 shadow-sm">
+        <header className="bg-white py-4 sticky top-0 z-50 shadow-sm border-b border-gray-100">
             <div className="container mx-auto px-4 flex justify-between items-center">
-                <Link href="/" className="flex items-center space-x-2">
-                    <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
-                    <h1 className="text-lg sm:text-2xl font-bold">
-                        Generative AI with <span className="inline-block text-blue-600">Local LLM</span>
+                <Link href="/" className="flex items-center space-x-3 group">
+                    <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg group-hover:scale-105 transition-transform duration-300">
+                        <Brain className="h-6 w-6 text-white" />
+                    </div>
+                    <h1 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        Quickstart GenAI
                     </h1>
                 </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center space-x-6">
+                <nav className="hidden md:flex items-center space-x-8">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-gray-600 hover:text-blue-600 transition-colors"
+                            className={cn(
+                                "text-gray-600 hover:text-blue-600 transition-colors font-medium",
+                                pathname === link.href ? "text-blue-600" : ""
+                            )}
                         >
                             {link.name}
                         </Link>
                     ))}
                     <Button
-                        variant="outline"
-                        className="flex items-center"
+                        className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
                         onClick={() => window.open("https://leanpub.com/quickstartwithai", "_blank", "noopener,noreferrer")}
                     >
                         <ShoppingCart className="mr-2 h-4 w-4" />

@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { ContentBlock } from './BlogContent';
-
 interface TableOfContentsProps {
-    content: ContentBlock[];
+    content: unknown[];
 }
 
 interface Heading {

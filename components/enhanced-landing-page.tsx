@@ -14,6 +14,7 @@ import { NavBar } from '@/components/NavBar'
 import { useEffect, useCallback } from 'react'
 import { TestimonialsSection } from '@/components/testimonials-section'
 import { LatestNewsSection } from '@/components/latest-news-section'
+import { NewsletterSubscription } from '@/components/ui/newsletter-subscription'
 
 const content = {
   "header": {
@@ -144,7 +145,7 @@ const content = {
       "links": [
         { "name": "Features", "href": "#features" },
         { "name": "Authors", "href": "#authors" },
-        { "name": "Articles", "href": "/blog" }
+        { "name": "Articles", "href": "https://blog.quickstartgenai.com" }
       ]
     },
     "connect": {
@@ -334,7 +335,7 @@ function WhyOutstandingSection() {
   );
 }
 
-export function EnhancedLandingPageComponent() {
+export function EnhancedLandingPageComponent({ showFooter = true }: { showFooter?: boolean } = {}) {
   const [mounted, setMounted] = useState(false)
 
   const [showContactForm, setShowContactForm] = useState(false);
@@ -529,12 +530,15 @@ export function EnhancedLandingPageComponent() {
             <FooterColumn title={content.footer.legal.title} links={content.footer.legal.links} />
             <div>
               <h4 className="font-bold text-lg mb-4">{content.footer.mailingList.title}</h4>
-              <form className="flex flex-col space-y-2">
-                <Input type="email" placeholder="Enter your email" className="bg-gray-800 border-gray-700 text-white" />
-                <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">
-                  {content.footer.mailingList.subscribeButton}
-                </Button>
-              </form>
+              <p className="text-gray-300 mb-4 text-sm">
+                Get updates from our blog at blog.quickstartgenai.com
+              </p>
+              <NewsletterSubscription 
+                variant="footer"
+                placeholder="Enter your email"
+                buttonText={content.footer.mailingList.subscribeButton}
+                successMessage="Successfully subscribed to our newsletter!"
+              />
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
@@ -632,7 +636,7 @@ export function EnhancedLandingPageComponent() {
         <AuthorsSection />
         <CallToActionSection />
       </main>
-      <Footer />
+      {showFooter && <Footer />}
       {showContactForm && <ContactFormDialog />}
     </div>
   );

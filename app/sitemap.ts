@@ -1,16 +1,11 @@
 import { MetadataRoute } from 'next'
-import { groq } from 'next-sanity'
-import { client } from '@/sanity/lib/client'
+import { getAllPostsMeta } from '@/lib/content/posts'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const posts = await client.fetch(groq`
-    *[_type == "post"] {
-      "slug": slug.current,
-      _updatedAt
-    }
-  `)
+    const posts = getAllPostsMeta().map(p => ({ slug: p.slug.current, _updatedAt: p.publishedAt }))
 
     const baseUrl = 'https://quickstartgenai.com'
+    const blogBaseUrl = 'https://blog.quickstartgenai.com'
 
     // Base routes
     const routes = [
@@ -21,16 +16,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 1,
         },
         {
-            url: `${baseUrl}/blog`,
+            url: `${baseUrl}/buy`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        },
+        {
+            url: blogBaseUrl,
             lastModified: new Date(),
             changeFrequency: 'daily' as const,
-            priority: 0.9,
+            priority: 0.8,
         },
         {
             url: `${baseUrl}/faq`,
             lastModified: new Date(),
             changeFrequency: 'weekly' as const,
-            priority: 0.8,
+            priority: 0.7,
         },
         {
             url: `${baseUrl}/privacy-policy`,
@@ -51,7 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     const postUrls = posts.map((post: Post) => ({
-        url: `${baseUrl}/blog/${post.slug}`,
+        url: `${blogBaseUrl}/${post.slug}`,
         lastModified: new Date(post._updatedAt),
         changeFrequency: 'monthly' as const,
         priority: 0.7,

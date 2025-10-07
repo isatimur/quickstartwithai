@@ -6,14 +6,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import Image from 'next/image';
 import { TableOfContents } from './TableOfContents';
-import BlogContent, { ContentBlock } from './BlogContent';
-import { client } from '@/sanity/lib/client';
-import imageUrlBuilder from '@sanity/image-url';
+import BlogContent from './BlogContent';
 import { BookOpen, Clock, ArrowUp, ArrowLeft, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
-const builder = imageUrlBuilder(client);
+// Images now passed as plain URLs; no Sanity image builder
 
 interface ArticleProps {
     title: string;
@@ -22,7 +20,7 @@ interface ArticleProps {
     mainImage: any;
     publishedAt: string;
     readingTime: string;
-    body: ContentBlock[];
+    body: unknown[];
 }
 
 const formatDate = (dateString: string) => {
@@ -79,9 +77,7 @@ export default function EnhancedCleanArticle({
         }
     };
 
-    const mainImageUrl = mainImage && mainImage.asset?._ref
-        ? builder.image(mainImage).url()
-        : '';
+    const mainImageUrl = typeof mainImage === 'string' ? mainImage : '';
 
     const formattedDate = formatDate(publishedAt);
 
@@ -90,7 +86,7 @@ export default function EnhancedCleanArticle({
             <Progress value={progress} className="fixed top-0 left-0 right-0 z-50" />
 
             <Button asChild className="mb-4">
-                <Link href="/blog">
+                <Link href="https://blog.quickstartgenai.com">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
                 </Link>
             </Button>
@@ -144,7 +140,7 @@ export default function EnhancedCleanArticle({
 
                 <main className="lg:w-3/4">
                     <article className="prose prose-lg mb-12">
-                        <BlogContent content={body} />
+                        <BlogContent />
                     </article>
                 </main>
             </div>
@@ -155,7 +151,7 @@ export default function EnhancedCleanArticle({
                         <Share2 className="h-5 w-5" />
                     </Button>
                     <Button asChild className="rounded-full p-2">
-                        <Link href="/blog">
+                        <Link href="https://blog.quickstartgenai.com">
                             <ArrowLeft className="h-5 w-5" />
                         </Link>
                     </Button>

@@ -10,3 +10,4 @@ Disallow: /studio/
 
 # Sitemap location
 Sitemap: https://quickstartgenai.com/sitemap.xml
+Sitemap: https://blog.quickstartgenai.com/sitemap.xml
