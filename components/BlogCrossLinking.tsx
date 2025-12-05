@@ -3,8 +3,7 @@
 import { memo, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Loader2, Clock, ChevronRight, Bookmark, Sparkles } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { ArrowRight, Loader2, Clock, ChevronRight, Sparkles } from 'lucide-react'
 
 interface BlogPost {
   title: string
@@ -17,33 +16,40 @@ interface BlogPost {
   category?: string
 }
 
+interface RSSItem {
+  title?: string
+  link?: string
+  isoDate?: string
+  description?: string
+  author?: string
+  categories?: string[]
+}
+
 export default memo(function BlogCrossLinking() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchBlogPosts() {
       try {
         const response = await fetch('/api/blog/rss')
         if (!response.ok) throw new Error('Failed to fetch blog posts')
-        const data = await response.json()
+        const data: RSSItem[] = await response.json()
         
-        const transformedPosts: BlogPost[] = data.map((item: any, index: number) => ({
+        const transformedPosts: BlogPost[] = data.map((item, index) => ({
           title: item.title || 'Untitled',
           url: item.link || '#',
           date: item.isoDate ? new Date(item.isoDate).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }) : 'Recent',
           excerpt: item.description ? item.description.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : 'Read more...',
           author: item.author || 'Team Quickstart',
           readTime: `${Math.ceil((item.description?.length || 1000) / 1000)} min read`,
-          featured: index === 0, // Only first one is featured
+          featured: index === 0,
           category: item.categories?.[0] || 'AI Development'
         }))
         
         setBlogPosts(transformedPosts)
       } catch (err) {
         console.error('Error fetching blog posts:', err)
-        setError('Failed to load blog posts')
         setBlogPosts([
           {
             title: "Update on Our Website & Publishing Direction",
