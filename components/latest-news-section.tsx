@@ -2,124 +2,185 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Globe, BookOpen } from 'lucide-react'
+import { ExternalLink, Sparkles, Newspaper, Rocket, ArrowRight, Bell } from 'lucide-react'
 import Image from "next/image"
 
 export function LatestNewsSection() {
   return (
     <section 
       aria-labelledby="latest-news-heading" 
-      className="py-20 bg-gradient-to-b from-white to-gray-50"
+      className="py-24 bg-gradient-to-b from-white via-blue-50/30 to-white relative overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-100/40 to-transparent rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-purple-100/40 to-transparent rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <header className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Sparkles className="h-4 w-4" />
+            <span>What&apos;s New</span>
+          </div>
           <h2 
             id="latest-news-heading" 
-            className="text-3xl sm:text-4xl font-bold mb-3 text-gray-800 tracking-tight"
+            className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 tracking-tight"
           >
-            Latest Book News
+            News & Updates
           </h2>
-          <div className="w-20 h-1 bg-blue-500 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Recent updates about &quot;Generative AI with Local LLM&quot; book availability and translations
+            Exciting milestones, new platforms, and upcoming projects from the authors
           </p>
         </header>
 
-        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          {/* Google Books Publication Card */}
-          <Card className="overflow-hidden transition-all hover:shadow-xl hover:translate-y-[-4px] bg-white rounded-xl border-0 shadow-md">
+        {/* Featured Announcement - Bombora Publication */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <Card className="overflow-hidden bg-gradient-to-r from-amber-50 via-orange-50 to-yellow-50 border-2 border-amber-200/50 shadow-xl">
             <CardContent className="p-0">
-              <div className="h-2 bg-blue-500 w-full" aria-hidden="true"></div>
-              <div className="p-8 flex flex-col h-full">
-                <article>
-                  <header className="mb-6">
-                    <div className="flex items-center gap-2 mb-5">
-                      <span className="inline-block bg-blue-100 text-blue-700 font-medium rounded-full px-3 py-1 text-xs uppercase tracking-wide">
-                        New Release
+              <div className="h-2 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 w-full"></div>
+              <div className="p-8 sm:p-10">
+                <div className="flex flex-col md:flex-row items-center gap-8">
+                  <div className="flex-shrink-0">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl blur-xl opacity-30 animate-pulse"></div>
+                      <Image 
+                        src="/images/bombora.png" 
+                        alt="Bombora Publishers" 
+                        width={180} 
+                        height={60} 
+                        className="relative h-14 w-auto object-contain"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-4">
+                      <span className="inline-flex items-center gap-1 bg-amber-500 text-white font-bold rounded-full px-4 py-1.5 text-sm uppercase tracking-wide shadow-md">
+                        <Sparkles className="h-3.5 w-3.5" />
+                        Now Available
+                      </span>
+                      <span className="inline-block bg-white/80 text-amber-700 font-medium rounded-full px-3 py-1 text-xs uppercase tracking-wide border border-amber-200">
+                        Major Milestone
                       </span>
                     </div>
-                    
-                    <h3 className="text-2xl font-bold mb-4 text-gray-800 tracking-tight flex items-center">
-                      Available on Google Books
-                      <svg className="w-5 h-5 text-blue-600 ml-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                      </svg>
+                    <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-gray-900">
+                      Published by Bombora Publishers! 🎉
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-4">
+                      We&apos;re thrilled to announce that our book is now officially published by <strong>Bombora Publishers</strong> — 
+                      one of the most respected technical publishing houses. This marks a huge milestone in making 
+                      practical AI knowledge accessible to developers worldwide.
+                    </p>
+                    <Button 
+                      className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg"
+                      onClick={() => window.open("https://leanpub.com/quickstartwithai", "_blank", "noopener,noreferrer")}
+                    >
+                      Get Your Copy <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Two Column Grid for Other News */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* New Blog Platform Card */}
+          <Card className="overflow-hidden transition-all hover:shadow-xl hover:translate-y-[-4px] bg-white rounded-xl border-0 shadow-md group">
+            <CardContent className="p-0">
+              <div className="h-1.5 bg-gradient-to-r from-purple-500 to-pink-500 w-full"></div>
+              <div className="p-6 flex flex-col h-full">
+                <article className="flex-1">
+                  <header className="mb-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Newspaper className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <span className="inline-block bg-purple-100 text-purple-700 font-medium rounded-full px-3 py-1 text-xs uppercase tracking-wide mb-3">
+                      New Platform
+                    </span>
+                    <h3 className="text-xl font-bold text-gray-900">
+                      Blog Has Moved!
                     </h3>
                   </header>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    Our book &quot;Generative AI with Local LLM&quot; is now available on Google Books, 
-                    expanding access to AI enthusiasts and practitioners worldwide.
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    We&apos;ve upgraded to a new CMS! Visit <strong>blog.quickstartgenai.com</strong> for the latest articles, tutorials, and book updates.
                   </p>
                 </article>
-                
-                <footer className="flex items-center justify-between mt-auto pt-5">
-                  <div className="flex items-center">
-                    <BookOpen className="h-4 w-4 text-blue-600 mr-2" aria-hidden="true" />
-                    <span className="text-sm font-medium text-gray-600">Digital Edition</span>
-                  </div>
-                  
+                <footer className="pt-4 mt-auto">
                   <Button 
                     variant="ghost" 
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-colors"
-                    onClick={() => window.open("https://www.google.me/books/edition/Generative_AI_with_local_LLM/WDBDEQAAQBAJ?hl=en&gbpv=0", "_blank", "noopener,noreferrer")}
-                    aria-label="View Generative AI with Local LLM on Google Books"
+                    size="sm"
+                    className="w-full justify-between text-purple-600 hover:text-purple-700 hover:bg-purple-50"
+                    onClick={() => window.open("https://blog.quickstartgenai.com", "_blank", "noopener,noreferrer")}
                   >
-                    View on Google Books
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                    <span className="flex items-center gap-1.5">
+                      <Bell className="h-3.5 w-3.5" /> Subscribe Now
+                    </span>
+                    <ExternalLink className="h-4 w-4" />
                   </Button>
                 </footer>
               </div>
             </CardContent>
           </Card>
 
-          {/* International Edition Card */}
-          <Card className="overflow-hidden transition-all hover:shadow-xl hover:translate-y-[-4px] bg-white rounded-xl border-0 shadow-md">
+          {/* Next Project Card */}
+          <Card className="overflow-hidden transition-all hover:shadow-xl hover:translate-y-[-4px] bg-white rounded-xl border-0 shadow-md group">
             <CardContent className="p-0">
-              <div className="h-2 bg-green-500 w-full" aria-hidden="true"></div>
-              <div className="p-8 flex flex-col h-full">
-                <article>
-                  <header className="mb-6">
-                    <div className="flex items-center gap-2 mb-5">
-                      <span className="inline-block bg-green-100 text-green-700 font-medium rounded-full px-3 py-1 text-xs uppercase tracking-wide">
-                        Coming Soon
-                      </span>
-                      <span className="inline-block bg-gray-100 text-gray-700 font-medium rounded-full px-3 py-1 text-xs uppercase tracking-wide">
-                        Q4 2025
-                      </span>
+              <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 w-full"></div>
+              <div className="p-6 flex flex-col h-full">
+                <article className="flex-1">
+                  <header className="mb-4">
+                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Rocket className="h-6 w-6 text-emerald-600" />
                     </div>
-                    
-                    <h3 className="text-2xl font-bold mb-4 text-gray-800 tracking-tight">
-                      Going Global
+                    <span className="inline-block bg-emerald-100 text-emerald-700 font-medium rounded-full px-3 py-1 text-xs uppercase tracking-wide mb-3">
+                      Coming Soon
+                    </span>
+                    <h3 className="text-xl font-bold text-gray-900">
+                      What&apos;s Next?
                     </h3>
                   </header>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    Our AI development book is expanding internationally with a new edition coming in late 2025 
-                    through Bombora Publishers, a respected publishing house known for high-quality technical literature.
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    We&apos;re working on something new! Check out <strong>beyond9to6.com</strong> — our upcoming project for developers ready to level up.
                   </p>
                 </article>
-                
-                <footer className="flex items-center justify-between mt-auto pt-5">
-                  <div className="flex items-center">
-                    <Globe className="h-4 w-4 text-green-600 mr-2" aria-hidden="true" />
-                    <span className="text-sm font-medium text-gray-600">International Edition</span>
-                  </div>
-                  
-                  <div className="flex items-center">
-                    {/* Bombora Publishers Logo */}
-                    <Image 
-                      src="/images/bombora.png" 
-                      alt="Bombora Publishers" 
-                      width={120} 
-                      height={40} 
-                      className="h-8 w-auto object-contain"
-                    />
-                  </div>
+                <footer className="pt-4 mt-auto">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="w-full justify-between text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50"
+                    onClick={() => window.open("https://beyond9to6.com", "_blank", "noopener,noreferrer")}
+                  >
+                    Explore Project
+                    <ExternalLink className="h-4 w-4" />
+                  </Button>
                 </footer>
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Subscribe CTA Banner */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(168,85,247,0.1),transparent_50%)]"></div>
+            <div className="relative z-10">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                Stay Updated with Our Journey
+              </h3>
+              <p className="text-gray-300 mb-6 max-w-xl mx-auto">
+                Subscribe to our blog for new articles on AI development, book updates, and early access to our upcoming projects.
+              </p>
+              <Button 
+                size="lg"
+                className="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8"
+                onClick={() => window.open("https://blog.quickstartgenai.com", "_blank", "noopener,noreferrer")}
+              >
+                <Bell className="mr-2 h-5 w-5" />
+                Subscribe to Blog
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
