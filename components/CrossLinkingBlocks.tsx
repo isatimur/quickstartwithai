@@ -7,7 +7,6 @@ import {
   Users, 
   HelpCircle, 
   ExternalLink, 
-  Star,
   ArrowRight,
   Sparkles,
   Zap,
@@ -15,6 +14,7 @@ import {
 } from 'lucide-react'
 import { crossLinkItems, topicItems } from '@/lib/constants/cross-linking-data'
 import { cn } from '@/lib/utils'
+import type { CrossLinkItem } from '@/lib/types/cross-linking'
 
 // Icon mapping
 const iconMap = {
@@ -31,7 +31,7 @@ const topicIconMap = {
 }
 
 // Premium Card Component
-const PremiumCard = ({ item, index }: { item: any, index: number }) => {
+const PremiumCard = ({ item, index }: { item: CrossLinkItem & { icon: React.ReactNode }, index: number }) => {
   // Determine gradient based on index for visual variety
   const gradients = [
     "from-blue-600/20 to-indigo-600/20",
