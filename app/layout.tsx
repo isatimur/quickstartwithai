@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://quickstartgenai.com',
     types: {
-      'application/rss+xml': 'https://blog.quickstartgenai.com/rss/',
+      'application/rss+xml': 'https://quickstartgenai.com/blog/feed.xml',
     }
   },
   twitter: {

@@ -20,7 +20,7 @@ export function BookLanding() {
           <a href="#notes">Field notes</a>
           <a href="#authors">Authors</a>
           <a href="/faq">FAQ</a>
-          <a href="https://blog.quickstartgenai.com/">Blog</a>
+          <a href="/blog">Blog</a>
           <a className="nav-buy" href="https://leanpub.com/quickstartwithai">
             Get your copy <span aria-hidden="true">↗</span>
           </a>
@@ -505,7 +505,7 @@ export function BookLanding() {
           Quickstart <b>GenAI</b>
         </a>
         <nav aria-label="Footer navigation">
-          <a href="https://blog.quickstartgenai.com/">Engineering blog ↗</a>
+          <a href="/blog">Engineering blog ↗</a>
           <a href="https://github.com/srecon/Getting_started_with_AI">
             Companion code ↗
           </a>

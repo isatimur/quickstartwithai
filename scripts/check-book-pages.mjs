@@ -22,7 +22,5 @@ for (const path of ['/buy', '/faq', '/privacy-policy', '/terms', '/llms.txt', '/
 }
 const sitemap = await (await fetch(base + '/sitemap.xml')).text()
 for (const path of pages.slice(1)) assert.ok(sitemap.includes(path), `sitemap: ${path}`)
-const redirects = await fetch(base + '/blog', { redirect: 'manual' })
-assert.equal(redirects.status, 301)
-assert.equal(redirects.headers.get('location'), 'https://blog.quickstartgenai.com/')
-console.log('PASS: server-rendered book and guides, production metadata, JSON-LD, images, legacy routes, sitemap, and blog redirect.')
+assert.equal((await fetch(base + '/blog', { redirect: 'manual' })).status, 200)
+console.log('PASS: server-rendered book and guides, production metadata, JSON-LD, images, legacy routes, sitemap, and restored blog.')
