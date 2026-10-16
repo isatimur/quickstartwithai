@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./book-design.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { PerformanceProvider } from '@/components/PerformanceProvider'
@@ -98,7 +99,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google.com" />
         
         {/* Meta Tags */}
-        <meta name="theme-color" content="#000000" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet" />
+        <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body

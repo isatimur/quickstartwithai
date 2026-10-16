@@ -1,0 +1,98 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://quickstartgenai.com/#website",
+      "url": "https://quickstartgenai.com/",
+      "name": "Quickstart GenAI",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Book",
+      "@id": "https://quickstartgenai.com/#book",
+      "name": "Generative AI with Local LLM",
+      "url": "https://leanpub.com/quickstartwithai",
+      "image": "https://quickstartgenai.com/book-cover.webp",
+      "inLanguage": "en",
+      "author": [
+        {
+          "@id": "https://quickstartgenai.com/#shamim"
+        },
+        {
+          "@id": "https://quickstartgenai.com/#timur"
+        }
+      ],
+      "description": "A practical roadmap to building generative AI applications with local language models, RAG, SQL integration, and AI agents.",
+      "bookFormat": "https://schema.org/EBook",
+      "sameAs": [
+        "https://quickstartgenai.com/",
+        "https://leanpub.com/quickstartwithai"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://quickstartgenai.com/#shamim",
+      "name": "Shamim Bhuiyan",
+      "jobTitle": "Enterprise Architect",
+      "sameAs": ["https://www.linkedin.com/in/shamimbhuiyan/"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://quickstartgenai.com/#timur",
+      "name": "Timur Isachenko",
+      "jobTitle": "Technical Lead & Solution Architect",
+      "sameAs": ["https://www.linkedin.com/in/timur-isachenko/"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://quickstartgenai.com/#webpage",
+      "url": "https://quickstartgenai.com/",
+      "name": "Generative AI with Local LLM — Practical AI Development Book",
+      "mainEntity": {
+        "@id": "https://quickstartgenai.com/#book"
+      },
+      "isPartOf": {
+        "@id": "https://quickstartgenai.com/#website"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://quickstartgenai.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is this book for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Software developers, AI engineers, and technical professionals who want a practical introduction to building with local LLMs. Some programming experience is helpful; you can be new to AI."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What tools does it cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The book explores Python, Ollama, llama.cpp, LangChain, vector databases, Docker, and techniques including RAG, AI agents, and Text-to-SQL."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I try it before buying?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Visit the book’s Leanpub page and select “Read Free Sample” to explore the sample before choosing an edition. Read a sample on Leanpub ↗"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I find the code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Explore the companion repository for examples alongside your reading. Open the GitHub repository ↗"
+          }
+        }
+      ]
+    }
+  ]
+}

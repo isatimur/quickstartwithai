@@ -1,0 +1,17 @@
+# Quickstart GenAI
+
+> Generative AI with Local LLM is a practical book by Shamim Bhuiyan and Timur Isachenko about local inference, RAG, SQL integration, and AI agents.
+
+## Book
+- [Book overview](https://quickstartgenai.com/): Authors, topics, FAQ, and companion code.
+- [Leanpub](https://leanpub.com/quickstartwithai): Current editions, pricing, complete contents, and free sample.
+- [Companion code](https://github.com/srecon/Getting_started_with_AI)
+- [Engineering blog](https://blog.quickstartgenai.com/)
+
+## Learning guides
+- [What is a local LLM?](https://quickstartgenai.com/guides/local-llm/)
+- [What is retrieval-augmented generation?](https://quickstartgenai.com/guides/rag/)
+- [How should I start learning local AI?](https://quickstartgenai.com/guides/learning-path/)
+
+## Notes
+The learning guides are site editorial introductions, not book excerpts. Page review dates describe the website content, not the book edition date. Current prices and availability are maintained on Leanpub. This file is a reading aid, not a guarantee of AI search inclusion.

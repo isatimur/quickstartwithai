@@ -58,5 +58,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
     }))
 
-    return [...routes, ...postUrls]
+    const guideUrls = ["local-llm", "rag", "learning-path"].map(slug => ({
+        url: `${baseUrl}/guides/${slug}/`,
+        lastModified: new Date("2026-10-15"),
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+    }))
+    return [...routes, ...guideUrls, ...postUrls]
 }
