@@ -92,7 +92,7 @@ export default function NotFound() {
               </Link>
               
               <Link
-                href="https://blog.quickstartgenai.com"
+                href="/blog"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-all duration-300 group"

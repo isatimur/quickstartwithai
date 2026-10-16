@@ -111,7 +111,7 @@ export default function FAQPage() {
                   Contact Us
                 </a>
                 <a 
-                  href="https://blog.quickstartgenai.com"
+                  href="/blog"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
